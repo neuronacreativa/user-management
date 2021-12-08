@@ -2,7 +2,7 @@ package org.nc.usermanagement.domain.valueObjects.shared;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.nc.usermanagement.domain.exception.DomainException;
+import org.nc.usermanagement.domain.exception.ValueObjectException;
 
 import java.util.Random;
 
@@ -31,7 +31,7 @@ class UuidTest {
 
     @Test
     void inValidTooMuchChars() {
-        Assertions.assertThrows(DomainException.class,
+        Assertions.assertThrows(ValueObjectException.class,
                 () -> new Uuid(this.randomString(CHAR_LIMIT + 1)));
     }
 }

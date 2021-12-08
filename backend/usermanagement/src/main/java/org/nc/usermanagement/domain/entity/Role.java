@@ -1,6 +1,7 @@
 package org.nc.usermanagement.domain.entity;
 
-import org.nc.usermanagement.domain.exception.DomainException;
+import org.nc.usermanagement.domain.exception.EntityException;
+import org.nc.usermanagement.domain.exception.ValueObjectException;
 import org.nc.usermanagement.domain.shared.Entity;
 import org.nc.usermanagement.domain.valueObjects.role.Priority;
 import org.nc.usermanagement.domain.valueObjects.role.RoleName;
@@ -12,10 +13,14 @@ public class Role implements Entity<Role> {
     private final RoleName roleName;
     private final Priority priority;
 
-    public Role(String uuid, String roleName, int priority) throws DomainException {
-        this.uuid = new Uuid(uuid);
-        this.roleName = new RoleName(roleName);
-        this.priority = new Priority(priority);
+    public Role(String uuid, String roleName, int priority) throws EntityException {
+        try {
+            this.uuid = new Uuid(uuid);
+            this.roleName = new RoleName(roleName);
+            this.priority = new Priority(priority);
+        }catch (ValueObjectException e) {
+            throw new EntityException(e.getMessage());
+        }
     }
 
     public Uuid getUuid() {

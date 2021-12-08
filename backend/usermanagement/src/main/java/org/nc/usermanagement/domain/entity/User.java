@@ -1,6 +1,7 @@
 package org.nc.usermanagement.domain.entity;
 
-import org.nc.usermanagement.domain.exception.DomainException;
+import org.nc.usermanagement.domain.exception.EntityException;
+import org.nc.usermanagement.domain.exception.ValueObjectException;
 import org.nc.usermanagement.domain.shared.Entity;
 import org.nc.usermanagement.domain.valueObjects.shared.Uuid;
 import org.nc.usermanagement.domain.valueObjects.user.Email;
@@ -17,12 +18,16 @@ public class User implements Entity<User> {
     private final Email email;
     private final List<Role> roles;
 
-    public User(String uuid, String userName, String password, String email, List<Role> roles) throws DomainException {
-        this.uuid = new Uuid(uuid);
-        this.userName = new UserName(userName);
-        this.password = new Password(password);
-        this.email = new Email(email);
-        this.roles = roles;
+    public User(String uuid, String userName, String password, String email, List<Role> roles) throws EntityException {
+        try{
+            this.uuid = new Uuid(uuid);
+            this.userName = new UserName(userName);
+            this.password = new Password(password);
+            this.email = new Email(email);
+            this.roles = roles;
+        } catch (ValueObjectException e) {
+            throw new EntityException(e.getMessage());
+        }
     }
 
     public Uuid getUuid() {
