@@ -18,15 +18,27 @@ public class User implements Entity<User> {
     private final Email email;
     private final List<Role> roles;
 
-    public User(String uuid, String userName, String password, String email, List<Role> roles) throws EntityException {
-        try{
-            this.uuid = new Uuid(uuid);
-            this.userName = new UserName(userName);
-            this.password = new Password(password);
-            this.email = new Email(email);
-            this.roles = roles;
-        } catch (ValueObjectException e) {
-            throw new EntityException(e.getMessage());
+    public User(String uuid, String userName, String password, String email, List<Role> roles) throws ValueObjectException, EntityException {
+        isValid(userName, password, email, roles);
+        this.uuid = new Uuid(uuid);
+        this.userName = new UserName(userName);
+        this.password = new Password(password);
+        this.email = new Email(email);
+        this.roles = roles;
+    }
+
+    private void isValid(String userName, String password, String email, List<Role> roles) throws EntityException {
+        if (userName == null || userName.trim().length() == 0) {
+            throw new EntityException("UserName is mandatory");
+        }
+        if (password == null || password.trim().length() == 0) {
+            throw new EntityException("Password is mandatory");
+        }
+        if (email == null || email.trim().length() == 0) {
+            throw new EntityException("Email is mandatory");
+        }
+        if (roles.isEmpty()) {
+            throw new EntityException("Roles is mandatory");
         }
     }
 

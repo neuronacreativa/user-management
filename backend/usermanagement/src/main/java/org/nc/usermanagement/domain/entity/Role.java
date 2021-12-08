@@ -13,13 +13,16 @@ public class Role implements Entity<Role> {
     private final RoleName roleName;
     private final Priority priority;
 
-    public Role(String uuid, String roleName, int priority) throws EntityException {
-        try {
-            this.uuid = new Uuid(uuid);
-            this.roleName = new RoleName(roleName);
-            this.priority = new Priority(priority);
-        }catch (ValueObjectException e) {
-            throw new EntityException(e.getMessage());
+    public Role(String uuid, String roleName, int priority) throws ValueObjectException, EntityException {
+        isValid(roleName);
+        this.uuid = new Uuid(uuid);
+        this.roleName = new RoleName(roleName);
+        this.priority = new Priority(priority);
+    }
+
+    private void isValid(String roleName) throws EntityException {
+        if (roleName == null || roleName.trim().length() == 0) {
+            throw new EntityException("RoleName is mandatory");
         }
     }
 
