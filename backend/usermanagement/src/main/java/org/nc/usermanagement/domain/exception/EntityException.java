@@ -1,9 +1,9 @@
 package org.nc.usermanagement.domain.exception;
 
-public class EntityException extends Exception{
+public class EntityException extends DomainException {
 
-    public EntityException(String message) {
-        super(message);
+    public EntityException(String code) {
+        super(code);
     }
 
 }

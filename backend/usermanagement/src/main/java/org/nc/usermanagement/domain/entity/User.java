@@ -29,16 +29,16 @@ public class User implements Entity<User> {
 
     private void isValid(String userName, String password, String email, List<Role> roles) throws EntityException {
         if (userName == null || userName.trim().length() == 0) {
-            throw new EntityException("UserName is mandatory");
+            throw new EntityException("userManagement.entity.ko.user.userNameRequired");
         }
         if (password == null || password.trim().length() == 0) {
-            throw new EntityException("Password is mandatory");
+            throw new EntityException("userManagement.entity.ko.user.passwordRequired");
         }
         if (email == null || email.trim().length() == 0) {
-            throw new EntityException("Email is mandatory");
+            throw new EntityException("userManagement.entity.ko.user.emailRequired");
         }
         if (roles.isEmpty()) {
-            throw new EntityException("Roles is mandatory");
+            throw new EntityException("userManagement.entity.ko.user.rolesRequired");
         }
     }
 

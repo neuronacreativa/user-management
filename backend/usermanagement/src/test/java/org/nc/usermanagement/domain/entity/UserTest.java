@@ -7,14 +7,15 @@ import org.nc.usermanagement.domain.exception.ValueObjectException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 class UserTest {
 
     private List<Role> getRoles() throws EntityException, ValueObjectException {
         List<Role> roleList = new ArrayList<>();
         Role role = new Role(
-                "This is a Uuid",
-                "This is a RoleName",
+                UUID.randomUUID().toString(),
+                "SUPERADMIN",
                 0
         );
         roleList.add(role);
@@ -26,72 +27,72 @@ class UserTest {
     }
 
     @Test
-    void valid() {
+    void createValid() {
         Assertions.assertDoesNotThrow(() -> {
             new User(
-                    "This is a uuid",
-                    "This is a UserName",
-                    "This is a password",
-                    "This is a email",
+                    UUID.randomUUID().toString(),
+                    "user.test",
+                    "A~$^+=<>a1",
+                    "user.example@test.org",
                     getRoles()
             );
         });
     }
 
     @Test
-    void inValidUserName() {
+    void createInValidUserName() {
         Assertions.assertThrows(EntityException.class, () -> {
             new User(
-                    "This is a valid uuid",
+                    UUID.randomUUID().toString(),
                     null,
-                    "This is a valid password",
-                    "This is a valid email",
+                    "A~$^+=<>a1",
+                    "user.example@test.org",
                     getRoles()
             );
             new User(
-                    "This is a valid uuid",
+                    UUID.randomUUID().toString(),
                     " ",
-                    "This is a valid password",
-                    "This is a valid email",
+                    "A~$^+=<>a1",
+                    "user.example@test.org",
                     getRoles()
             );
         });
     }
 
     @Test
-    void inValidPassword() {
+    void createInValidPassword() {
         Assertions.assertThrows(EntityException.class, () -> {
             new User(
-                    "This is a valid uuid",
-                    "This is a valid userName",
+                    UUID.randomUUID().toString(),
+                    "user.test",
                     null,
-                    "This is a valid email",
+                    "user.example@test.org",
                     getRoles()
             );
             new User(
-                    "This is a valid uuid",
-                    "This is a valid userName",
+                    UUID.randomUUID().toString(),
+                    "user.test",
                     " ",
-                    "This is a valid email",
+                    "user.example@test.org",
                     getRoles()
             );
         });
     }
 
     @Test
-    void inValidEmail() {
+    void createInValidEmail() {
         Assertions.assertThrows(EntityException.class, () -> {
             new User(
-                    "This is a valid uuid",
-                    "This is a valid userName",
-                    "This is a valid password",
+                    UUID.randomUUID().toString(),
+                    "user.test",
+                    "A~$^+=<>a1",
                     null,
                     getRoles()
             );
             new User(
-                    "This is a valid uuid",
-                    "This is a valid userName",
-                    "This is a valid password",
+                    UUID.randomUUID().toString(),
+                    "user.test",
+                    "A~$^+=<>a1",
                     " ",
                     getRoles()
             );
@@ -99,15 +100,36 @@ class UserTest {
     }
 
     @Test
-    void inValidRole() {
+    void createInValidRole() {
         Assertions.assertThrows(EntityException.class, () ->
             new User(
-                    "This is a uuid",
-                    "This is a UserName",
-                    "This is a password",
-                    "This is a email",
+                    UUID.randomUUID().toString(),
+                    "user.test",
+                    "A~$^+=<>a1",
+                    "user.example@test.org",
                     getRolesEmpty()
             )
         );
     }
-}
+
+    @Test
+    void readValid() {
+        Assertions.assertDoesNotThrow(() -> {
+            User user= new User(
+                    UUID.randomUUID().toString(),
+                    "user.test",
+                    "A~$^+=<>a1",
+                    "user.example@test.org",
+                    getRoles()
+            );
+            user.sameIdentityAs(
+                    new User(
+                            user.getUuid().getUuid(),
+                            user.getUserName().getUserName(),
+                            user.getPassword().getPassword(),
+                            user.getEmail().getEmail(),
+                            user.getRoles()
+                    )
+            );
+        });
+    }}

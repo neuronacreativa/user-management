@@ -14,15 +14,18 @@ public class Role implements Entity<Role> {
     private final Priority priority;
 
     public Role(String uuid, String roleName, int priority) throws ValueObjectException, EntityException {
-        isValid(roleName);
+        isValid(uuid, roleName);
         this.uuid = new Uuid(uuid);
         this.roleName = new RoleName(roleName);
         this.priority = new Priority(priority);
     }
 
-    private void isValid(String roleName) throws EntityException {
+    private void isValid(String uuid, String roleName) throws EntityException {
+        if (uuid == null || uuid.trim().length() == 0) {
+            throw new EntityException("userManagement.entity.ko.role.uuidRequired");
+        }
         if (roleName == null || roleName.trim().length() == 0) {
-            throw new EntityException("RoleName is mandatory");
+            throw new EntityException("userManagement.entity.ko.role.roleNameRequired");
         }
     }
 

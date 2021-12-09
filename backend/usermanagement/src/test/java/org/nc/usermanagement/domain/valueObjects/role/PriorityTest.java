@@ -6,9 +6,17 @@ import org.junit.jupiter.api.Test;
 class PriorityTest {
 
     @Test
-    void valid() {
+    void createValid() {
         Assertions.assertDoesNotThrow(() -> {
              new Priority(1);
+        });
+    }
+
+    @Test
+    void readValid() {
+        Assertions.assertDoesNotThrow(() -> {
+            Priority priority = new Priority(1);
+            priority.sameValueAs(new Priority(priority.getPriority()));
         });
     }
 }

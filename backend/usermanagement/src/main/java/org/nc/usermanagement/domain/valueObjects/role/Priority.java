@@ -5,7 +5,6 @@ import org.nc.usermanagement.domain.shared.ValueObject;
 public class Priority implements ValueObject<Priority> {
 
     private final int priority;
-    // TODO: Add validations
 
     public Priority(int priority) {
         this.priority = priority;

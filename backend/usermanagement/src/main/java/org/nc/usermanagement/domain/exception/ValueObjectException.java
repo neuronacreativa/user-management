@@ -1,9 +1,9 @@
 package org.nc.usermanagement.domain.exception;
 
-public class ValueObjectException extends Exception{
+public class ValueObjectException extends DomainException {
 
-    public ValueObjectException(String message) {
-        super(message);
+    public ValueObjectException(String code) {
+        super(code);
     }
 
 }
