@@ -2,9 +2,12 @@ package org.nc.usermanagement.domain.entity;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.nc.usermanagement.domain.exception.EntityException;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 class RoleTest {
 
@@ -19,25 +22,42 @@ class RoleTest {
         });
     }
 
-    @Test
-    void createInValid() {
-        Assertions.assertThrows(EntityException.class, () -> {
+    static Stream<String> invalidRoleNameProvider() {
+        return Stream.of(
+                " ",
+                null
+        );
+    }
+
+    static Stream<String> invalidUuidProvider() {
+        return Stream.of(
+                " ",
+                null
+        );
+    }
+
+    @ParameterizedTest(name = "#{index} - Run test with roleName = {0}")
+    @MethodSource("invalidRoleNameProvider")
+    void createInValidRoleName(String roleName) {
+        Assertions.assertThrows(EntityException.class, () ->
                 new Role(
                         UUID.randomUUID().toString(),
-                        null,
+                        roleName,
                         0
-                );
+                )
+        );
+    }
+
+    @ParameterizedTest(name = "#{index} - Run test with uuid = {0}")
+    @MethodSource("invalidUuidProvider")
+    void createInValidUuid(String uuid) {
+        Assertions.assertThrows(EntityException.class, () ->
                 new Role(
-                        "This is not a Uuid",
+                        uuid,
                         "SUPERADMIN",
                         0
-                );
-                new Role(
-                        UUID.randomUUID().toString(),
-                        " ",
-                        0
-                );
-        });
+                )
+        );
     }
 
     @Test
