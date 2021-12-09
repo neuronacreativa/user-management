@@ -1,7 +1,7 @@
 package org.nc.usermanagement.application.usecases.role.create;
 
 import org.nc.usermanagement.application.usecases.role.RoleRepository;
-import org.nc.usermanagement.domain.entity.Role;
+import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleIn;
 
 public class CreateRole {
 
@@ -11,7 +11,7 @@ public class CreateRole {
         this.roleRepository = roleRepository;
     }
 
-    public void create(Role role) throws CreateRoleException {
-        this.roleRepository.save(role);
+    public void create(CreateRoleIn createRoleIn) throws CreateRoleException {
+        this.roleRepository.save(createRoleIn.getRole());
     }
 }
