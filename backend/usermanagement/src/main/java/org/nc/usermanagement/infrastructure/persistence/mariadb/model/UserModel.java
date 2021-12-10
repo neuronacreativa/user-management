@@ -1,8 +1,6 @@
-package org.nc.usermanagement.infrastructure.persistence.model;
+package org.nc.usermanagement.infrastructure.persistence.mariadb.model;
 
-import org.nc.usermanagement.domain.entity.Role;
 import org.nc.usermanagement.domain.entity.User;
-import org.nc.usermanagement.domain.valueObjects.user.Email;
 
 import javax.persistence.*;
 import java.util.ArrayList;

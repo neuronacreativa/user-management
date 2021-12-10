@@ -1,16 +1,13 @@
-package org.nc.usermanagement.infrastructure.persistence.model;
+package org.nc.usermanagement.infrastructure.persistence.mariadb.model;
 
 import org.nc.usermanagement.domain.entity.Role;
 import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
-import org.nc.usermanagement.domain.valueObjects.role.Priority;
-import org.nc.usermanagement.domain.valueObjects.role.RoleName;
-import org.nc.usermanagement.domain.valueObjects.shared.Uuid;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "USR_ROLE")
+@Table(name = "USER_ROLE")
 public class RoleModel {
 
     @Id
@@ -27,7 +24,7 @@ public class RoleModel {
     private int priority;
 
     @ManyToOne
-    @JoinColumn(name = "FK_ROLE_USER", nullable = false, updatable = false)
+    @JoinColumn(name = "FK_ROLE_USER")
     private UserModel userModel;
 
     public RoleModel() {

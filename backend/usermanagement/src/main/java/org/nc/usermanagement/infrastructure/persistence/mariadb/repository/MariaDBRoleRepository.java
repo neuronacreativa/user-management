@@ -1,4 +1,4 @@
-package org.nc.usermanagement.infrastructure.persistence.repository;
+package org.nc.usermanagement.infrastructure.persistence.mariadb.repository;
 
 import org.nc.usermanagement.application.usecases.role.RoleRepository;
 import org.nc.usermanagement.application.usecases.role.create.CreateRoleException;
@@ -7,8 +7,8 @@ import org.nc.usermanagement.application.usecases.role.read.RoleNotFoundExceptio
 import org.nc.usermanagement.domain.entity.Role;
 import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
-import org.nc.usermanagement.infrastructure.persistence.model.RoleModel;
-import org.nc.usermanagement.infrastructure.persistence.repository.jpa.JpaRoleModelRepository;
+import org.nc.usermanagement.infrastructure.persistence.mariadb.model.RoleModel;
+import org.nc.usermanagement.infrastructure.persistence.mariadb.repository.jpa.JpaRoleModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
