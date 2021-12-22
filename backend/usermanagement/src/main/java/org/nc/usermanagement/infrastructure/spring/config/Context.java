@@ -1,6 +1,6 @@
 package org.nc.usermanagement.infrastructure.spring.config;
 
-import org.nc.usermanagement.infrastructure.persistence.mariadb.repository.MariaDBRoleRepository;
+import org.nc.usermanagement.infrastructure.persistence.db.repository.DBRoleRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 public class Context {
 
     @Bean
-    public MariaDBRoleRepository getRoleRepository() {
-        return new MariaDBRoleRepository();
+    public DBRoleRepository getRoleRepository() {
+        return new DBRoleRepository();
     }
 
 }

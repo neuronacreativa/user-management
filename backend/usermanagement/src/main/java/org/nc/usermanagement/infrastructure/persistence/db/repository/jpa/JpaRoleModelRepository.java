@@ -1,6 +1,6 @@
-package org.nc.usermanagement.infrastructure.persistence.mariadb.repository.jpa;
+package org.nc.usermanagement.infrastructure.persistence.db.repository.jpa;
 
-import org.nc.usermanagement.infrastructure.persistence.mariadb.model.RoleModel;
+import org.nc.usermanagement.infrastructure.persistence.db.model.RoleModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package org.nc.usermanagement.infrastructure.persistence.mariadb.model;
+package org.nc.usermanagement.infrastructure.persistence.db.model;
 
 import org.nc.usermanagement.domain.entity.Role;
 import org.nc.usermanagement.domain.exception.EntityException;
