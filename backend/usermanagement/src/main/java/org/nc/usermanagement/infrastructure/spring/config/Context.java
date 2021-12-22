@@ -1,5 +1,6 @@
 package org.nc.usermanagement.infrastructure.spring.config;
 
+import org.nc.usermanagement.application.usecases.role.create.CreateRole;
 import org.nc.usermanagement.infrastructure.persistence.db.repository.DBRoleRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,8 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class Context {
 
     @Bean
-    public DBRoleRepository getRoleRepository() {
-        return new DBRoleRepository();
+    public CreateRole getCreateRole() {
+        return new CreateRole();
     }
-
 }

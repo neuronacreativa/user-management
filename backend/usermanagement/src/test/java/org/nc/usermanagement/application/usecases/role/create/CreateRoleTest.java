@@ -12,19 +12,19 @@ import static org.junit.jupiter.api.Assertions.*;
 class CreateRoleTest {
 
     @Autowired
+    private CreateRole createRole;
+
+    @Autowired
     private DBRoleRepository DBRoleRepository;
 
     @Test
     void valid() {
-        assertDoesNotThrow(() -> {
-            CreateRole createRole = new CreateRole(
-                    DBRoleRepository
-            );
-            createRole.create(
+        assertDoesNotThrow(() ->
+            this.createRole.create(
                     new CreateRoleIn(
                             "SUPERADMIN", 0
-                    )
-            );
-        });
+                    ), DBRoleRepository
+            )
+        );
     }
 }
