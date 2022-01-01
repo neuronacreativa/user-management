@@ -3,34 +3,41 @@ package org.nc.usermanagement.infrastructure.rest.role.controller;
 import org.nc.usermanagement.application.usecases.role.create.CreateRole;
 import org.nc.usermanagement.application.usecases.role.create.CreateRoleException;
 import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleIn;
+import org.nc.usermanagement.domain.exception.EntityException;
+import org.nc.usermanagement.domain.exception.ValueObjectException;
 import org.nc.usermanagement.infrastructure.persistence.db.repository.DBRoleRepository;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 @RestController
 public class CreateRoleController {
 
-    private final CreateRole createRole;
-    private final DBRoleRepository dbRoleRepository;
+    @Autowired
+    private CreateRole createRole;
 
-    public CreateRoleController(CreateRole createRole, DBRoleRepository dbRoleRepository) {
-        this.createRole = createRole;
-        this.dbRoleRepository = dbRoleRepository;
-    }
+    @Autowired
+    private DBRoleRepository dbRoleRepository;
 
     @PostMapping("role")
     public ResponseEntity<?> create(
-            @RequestBody CreateRoleIn createRoleIn
-    ) {
-        try {
-            this.createRole.create(createRoleIn, this.dbRoleRepository);
-            return ResponseEntity.ok().build();
-        } catch (CreateRoleException e) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Foo Not Found", e
-            );
-        }
+            @RequestBody CreateRoleControllerIn createRoleControllerIn
+    ) throws CreateRoleException, EntityException, ValueObjectException, URISyntaxException {
+
+        CreateRoleIn createRoleIn = new CreateRoleIn(
+                createRoleControllerIn.getRoleName(),
+                createRoleControllerIn.getPriority()
+        );
+
+        this.createRole.create(createRoleIn, this.dbRoleRepository);
+        return ResponseEntity.created(
+                new URI(createRoleIn.getRole().getUuid().getUuid())
+        ).build();
+
     }
 }

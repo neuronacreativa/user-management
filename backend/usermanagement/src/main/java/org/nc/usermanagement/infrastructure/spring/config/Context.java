@@ -1,7 +1,6 @@
 package org.nc.usermanagement.infrastructure.spring.config;
 
 import org.nc.usermanagement.application.usecases.role.create.CreateRole;
-import org.nc.usermanagement.infrastructure.persistence.db.repository.DBRoleRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
