@@ -20,11 +20,22 @@ class CreateRoleTest {
     @Test
     void valid() {
         assertDoesNotThrow(() ->
-            this.createRole.create(
-                    new CreateRoleIn(
-                            "ROLE_SUPER_ADMIN", 0
-                    ), DBRoleRepository
-            )
+                this.createRole.create(
+                        new CreateRoleIn(
+                                "ROLE_SUPER_ADMIN", 0
+                        ), DBRoleRepository
+                )
+        );
+    }
+
+    @Test
+    void inValid() {
+        assertThrows(CreateRoleException.class, () ->
+                this.createRole.create(
+                        new CreateRoleIn(
+                                "ROLE_NOT_VALID", 0
+                        ), DBRoleRepository
+                )
         );
     }
 }
