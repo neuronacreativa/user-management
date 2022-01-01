@@ -22,7 +22,7 @@ class CreateRoleTest {
         assertDoesNotThrow(() ->
             this.createRole.create(
                     new CreateRoleIn(
-                            "SUPERADMIN", 0
+                            "ROLE_SUPER_ADMIN", 0
                     ), DBRoleRepository
             )
         );
