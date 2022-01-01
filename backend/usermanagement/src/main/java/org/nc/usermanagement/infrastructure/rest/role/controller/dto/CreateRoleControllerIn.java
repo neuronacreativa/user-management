@@ -1,8 +1,4 @@
-package org.nc.usermanagement.infrastructure.rest.role.controller;
-
-import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleIn;
-import org.nc.usermanagement.domain.exception.EntityException;
-import org.nc.usermanagement.domain.exception.ValueObjectException;
+package org.nc.usermanagement.infrastructure.rest.role.controller.dto;
 
 public class CreateRoleControllerIn {
 
