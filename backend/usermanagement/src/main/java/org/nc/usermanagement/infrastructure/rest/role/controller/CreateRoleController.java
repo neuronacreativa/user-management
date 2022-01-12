@@ -1,7 +1,7 @@
 package org.nc.usermanagement.infrastructure.rest.role.controller;
 
 import org.nc.usermanagement.application.usecases.role.create.CreateRole;
-import org.nc.usermanagement.application.usecases.role.create.CreateRoleException;
+import org.nc.usermanagement.application.usecases.role.create.exception.CreateRoleException;
 import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleIn;
 import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleOut;
 import org.nc.usermanagement.domain.exception.EntityException;
@@ -35,17 +35,17 @@ public class CreateRoleController {
 
         try {
 
-            CreateRoleIn createRoleIn = new CreateRoleIn(
-                    createRoleControllerIn.getRoleName(),
-                    createRoleControllerIn.getPriority()
-            );
+            CreateRoleOut createRoleOut = this.createRole.create(
+                    new CreateRoleIn(
+                            createRoleControllerIn.getRoleName(),
+                            createRoleControllerIn.getPriority()
+                    ), this.dbRoleRepository);
 
-            CreateRoleOut createRoleOut = this.createRole.create(createRoleIn, this.dbRoleRepository);
             return ResponseEntity.created(
                     new URI(createRoleOut.getUuid())
             ).build();
 
-        } catch (CreateRoleException | EntityException | ValueObjectException | URISyntaxException e) {
+        } catch (CreateRoleException | URISyntaxException e) {
             throw new UserManagementException(e);
         }
 

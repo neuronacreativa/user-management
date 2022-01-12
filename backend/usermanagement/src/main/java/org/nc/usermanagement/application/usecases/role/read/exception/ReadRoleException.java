@@ -1,4 +1,4 @@
-package org.nc.usermanagement.application.usecases.role.read;
+package org.nc.usermanagement.application.usecases.role.read.exception;
 
 import org.nc.usermanagement.application.usecases.UseCaseException;
 

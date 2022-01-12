@@ -1,4 +1,4 @@
-package org.nc.usermanagement.application.usecases.role.create;
+package org.nc.usermanagement.application.usecases.role.create.exception;
 
 import org.nc.usermanagement.application.usecases.UseCaseException;
 

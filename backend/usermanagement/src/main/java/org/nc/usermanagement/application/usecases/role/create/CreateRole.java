@@ -3,13 +3,14 @@ package org.nc.usermanagement.application.usecases.role.create;
 import org.nc.usermanagement.application.usecases.role.RoleRepository;
 import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleIn;
 import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleOut;
+import org.nc.usermanagement.application.usecases.role.create.exception.CreateRoleException;
 
 public class CreateRole {
 
     public CreateRoleOut create(CreateRoleIn createRoleIn, RoleRepository roleRepository) throws CreateRoleException {
 
         if (!createRoleIn.getRole().getRoleName().getRoleName().equals("ROLE_SUPER_ADMIN")) {
-            throw new CreateRoleException("This is bullshit");
+            throw new CreateRoleException("userManagement.useCase.createRole.roleNotValid");
         }
 
         roleRepository.save(createRoleIn.getRole());

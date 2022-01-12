@@ -1,8 +1,7 @@
 package org.nc.usermanagement.application.usecases.role;
 
-import org.nc.usermanagement.application.usecases.role.create.CreateRoleException;
-import org.nc.usermanagement.application.usecases.role.read.ReadRoleException;
-import org.nc.usermanagement.application.usecases.role.read.RoleNotFoundException;
+import org.nc.usermanagement.application.usecases.role.create.exception.CreateRoleException;
+import org.nc.usermanagement.application.usecases.role.read.exception.ReadRoleException;
 import org.nc.usermanagement.domain.entity.Role;
 import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;

@@ -2,6 +2,7 @@ package org.nc.usermanagement.application.usecases.role.create;
 
 import org.junit.jupiter.api.Test;
 import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleIn;
+import org.nc.usermanagement.application.usecases.role.create.exception.CreateRoleException;
 import org.nc.usermanagement.infrastructure.persistence.db.repository.DBRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

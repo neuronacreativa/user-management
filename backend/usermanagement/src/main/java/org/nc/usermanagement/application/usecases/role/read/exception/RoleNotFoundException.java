@@ -1,10 +1,10 @@
-package org.nc.usermanagement.application.usecases.role.read;
+package org.nc.usermanagement.application.usecases.role.read.exception;
 
 
 public class RoleNotFoundException extends ReadRoleException {
 
     public RoleNotFoundException() {
-        super("userManagement.usecase.ko.role.roleNotFound");
+        super("userManagement.useCase.createRole.roleNotFound");
     }
 
     public RoleNotFoundException(Exception exception) {
