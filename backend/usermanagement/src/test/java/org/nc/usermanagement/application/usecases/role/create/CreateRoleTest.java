@@ -7,7 +7,8 @@ import org.nc.usermanagement.infrastructure.persistence.db.repository.DBRoleRepo
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 class CreateRoleTest {
@@ -30,11 +31,28 @@ class CreateRoleTest {
     }
 
     @Test
-    void inValid() {
+    void inValidRoleNameAlreadyExists() {
+        assertThrows(CreateRoleException.class, () -> {
+                this.createRole.create(
+                        new CreateRoleIn(
+                                "ROLE_SUPER_ADMIN", 0
+                        ), DBRoleRepository
+                );
+                this.createRole.create(
+                        new CreateRoleIn(
+                                "ROLE_SUPER_ADMIN", 0
+                        ), DBRoleRepository
+                );
+            }
+        );
+    }
+
+    @Test
+    void inValidRoleName() {
         assertThrows(CreateRoleException.class, () ->
                 this.createRole.create(
                         new CreateRoleIn(
-                                "ROLE_NOT_VALID", 0
+                                "Invalid", 0
                         ), DBRoleRepository
                 )
         );
