@@ -31,7 +31,7 @@ public class CreateRoleController {
     @PostMapping("role")
     public ResponseEntity<CreateRoleControllerOut> create(
             @RequestBody CreateRoleControllerIn createRoleControllerIn
-    ) throws UserManagementException {
+    ) throws UserManagementException, URISyntaxException {
 
         try {
 
@@ -45,7 +45,7 @@ public class CreateRoleController {
                     new URI(createRoleOut.getUuid())
             ).build();
 
-        } catch (CreateRoleException | URISyntaxException e) {
+        } catch (CreateRoleException | URISyntaxException | EntityException | ValueObjectException e) {
             throw new UserManagementException(e);
         }
 
