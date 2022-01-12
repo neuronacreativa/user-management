@@ -18,6 +18,11 @@ public class RoleName implements ValueObject<RoleName> {
     }
 
     private void isValid(String roleName) throws ValueObjectException {
+
+        if (!roleName.contains("ROLE_")) {
+            throw new ValueObjectException("userManagement.valueObject.ko.roleName.mustBeginsWith");
+        }
+
         if (roleName.length() > CHAR_LIMIT) {
             throw new ValueObjectException("userManagement.valueObject.ko.roleName.charLimitExceeded");
         }
