@@ -12,6 +12,6 @@ public class UserManagementControllerAdvice extends ResponseEntityExceptionHandl
             UserManagementException.class
     })
     protected ResponseEntity<Object> handleCreateRoleException(Exception e) {
-        return ResponseEntity.badRequest().body(e);
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 }
