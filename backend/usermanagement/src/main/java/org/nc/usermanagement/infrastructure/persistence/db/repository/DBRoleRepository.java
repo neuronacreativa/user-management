@@ -30,8 +30,18 @@ public class DBRoleRepository implements RoleRepository {
     }
 
     @Override
-    public Role findByUuid(String uuid) throws EntityException, ValueObjectException, ReadRoleException {
+    public Role findByUuid(String uuid) throws EntityException, ValueObjectException, RoleNotFoundException {
         Optional<RoleModel> roleModel = jpaRoleModelRepository.findByUuid(uuid);
+
+        if (roleModel.isEmpty())
+            throw new RoleNotFoundException();
+
+        return roleModel.get().getRole();
+    }
+
+    @Override
+    public Role findByRoleName(String roleName) throws EntityException, ValueObjectException, RoleNotFoundException {
+        Optional<RoleModel> roleModel = jpaRoleModelRepository.findByRoleName(roleName);
 
         if (roleModel.isEmpty())
             throw new RoleNotFoundException();
