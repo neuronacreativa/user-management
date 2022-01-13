@@ -22,7 +22,7 @@ public class CreateRole {
     public CreateRoleOut create(CreateRoleIn createRoleIn, RoleRepository roleRepository) throws CreateRoleException, EntityException, ValueObjectException {
 
         try {
-            readRole.readByRoleName(
+            readRole.findByRoleName(
                     new ReadByRoleNameIn(
                             createRoleIn.getRole().getRoleName().getRoleName()
                     ), roleRepository

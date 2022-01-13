@@ -5,6 +5,7 @@ import org.nc.usermanagement.application.usecases.role.create.CreateRole;
 import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleIn;
 import org.nc.usermanagement.application.usecases.role.create.exception.CreateRoleException;
 import org.nc.usermanagement.application.usecases.role.read.dto.ReadByRoleNameIn;
+import org.nc.usermanagement.application.usecases.role.read.exception.RoleNotFoundException;
 import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
 import org.nc.usermanagement.infrastructure.persistence.db.repository.DBRoleRepository;
@@ -29,7 +30,6 @@ class ReadRoleTest {
     @Autowired
     private DBRoleRepository dbRoleRepository;
 
-    // TODO
     @Test
     void validReadRoleByRoleName() throws CreateRoleException, EntityException, ValueObjectException {
 
@@ -42,11 +42,20 @@ class ReadRoleTest {
         );
 
         assertDoesNotThrow(() ->
-                this.readRole.readByRoleName(
+                this.readRole.findByRoleName(
                         new ReadByRoleNameIn("ROLE_USER"),
                         this.dbRoleRepository
                 )
         );
+    }
 
+    @Test
+    void inValidRoleDoesNotExists() {
+        assertThrows(RoleNotFoundException.class, () ->
+                this.readRole.findByRoleName(
+                        new ReadByRoleNameIn("ROLE_NOT_FOUND"),
+                        this.dbRoleRepository
+                )
+        );
     }
 }
