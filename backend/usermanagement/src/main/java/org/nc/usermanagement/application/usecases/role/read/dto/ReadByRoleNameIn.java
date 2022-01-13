@@ -1,6 +1,5 @@
 package org.nc.usermanagement.application.usecases.role.read.dto;
 
-import org.nc.usermanagement.application.usecases.role.read.exception.ReadRoleException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
 import org.nc.usermanagement.domain.valueObjects.role.RoleName;
 
