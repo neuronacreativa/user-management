@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class RoleName implements ValueObject<RoleName> {
 
     private final String roleName;
-    private static final int CHAR_LIMIT = 20;
+    private static final int CHAR_LIMIT = 25;
     private static final String regex = "([A-Z.\\-_0-9])+";
 
     public RoleName(String roleName) throws ValueObjectException {

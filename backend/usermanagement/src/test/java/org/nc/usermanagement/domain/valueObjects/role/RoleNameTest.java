@@ -11,11 +11,10 @@ class RoleNameTest {
 
     static Stream<String> validRoleNameProvider() {
         return Stream.of(
-                "SUPERADMIN",
-                "SUPER-ADMIN",
-                "SUPER.ADMIN",
-                "SUPER_ADMIN",
-                "SUPERADMIN0123456789"
+                "ROLE_SUPER_ADMIN",
+                "ROLE_SUPER-ADMIN",
+                "ROLE_SUPER.ADMIN",
+                "ROLE_USER_0123456789"
         );
     }
     static Stream<String> invalidRoleNameProvider() {

@@ -15,7 +15,7 @@ class UserTest {
         List<Role> roleList = new ArrayList<>();
         Role role = new Role(
                 UUID.randomUUID().toString(),
-                "SUPERADMIN",
+                "ROLE_SUPER_ADMIN",
                 0
         );
         roleList.add(role);

@@ -16,7 +16,7 @@ class RoleTest {
         Assertions.assertDoesNotThrow(() -> {
             new Role(
                     UUID.randomUUID().toString(),
-                    "SUPERADMIN",
+                    "ROLE_SUPER_ADMIN",
                     0
             );
         });
@@ -54,7 +54,7 @@ class RoleTest {
         Assertions.assertThrows(EntityException.class, () ->
                 new Role(
                         uuid,
-                        "SUPERADMIN",
+                        "SUPER_ADMIN",
                         0
                 )
         );
@@ -65,7 +65,7 @@ class RoleTest {
         Assertions.assertDoesNotThrow(() -> {
             Role role = new Role(
                     UUID.randomUUID().toString(),
-                    "SUPERADMIN",
+                    "ROLE_SUPER_ADMIN",
                     0
             );
             role.sameIdentityAs(
