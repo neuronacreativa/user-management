@@ -7,7 +7,7 @@ import org.nc.usermanagement.application.usecases.role.read.exception.RoleNotFou
 import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
 
-public class ReadRole {
+public class FindRoleByRoleName {
 
     public ReadRoleOut findByRoleName(ReadByRoleNameIn readByRoleNameIn, RoleRepository roleRepository)
             throws EntityException, RoleNotFoundException, ValueObjectException {

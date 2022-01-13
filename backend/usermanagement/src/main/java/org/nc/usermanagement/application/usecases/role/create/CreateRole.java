@@ -5,7 +5,7 @@ import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleIn;
 import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleOut;
 import org.nc.usermanagement.application.usecases.role.create.exception.CreateRoleException;
 import org.nc.usermanagement.application.usecases.role.create.exception.RoleAlreadyExistsException;
-import org.nc.usermanagement.application.usecases.role.read.ReadRole;
+import org.nc.usermanagement.application.usecases.role.read.FindRoleByRoleName;
 import org.nc.usermanagement.application.usecases.role.read.dto.ReadByRoleNameIn;
 import org.nc.usermanagement.application.usecases.role.read.exception.RoleNotFoundException;
 import org.nc.usermanagement.domain.exception.EntityException;
@@ -13,16 +13,16 @@ import org.nc.usermanagement.domain.exception.ValueObjectException;
 
 public class CreateRole {
 
-    private final ReadRole readRole;
+    private final FindRoleByRoleName findRoleByRoleName;
 
-    public CreateRole(ReadRole readRole) {
-        this.readRole = readRole;
+    public CreateRole(FindRoleByRoleName findRoleByRoleName) {
+        this.findRoleByRoleName = findRoleByRoleName;
     }
 
     public CreateRoleOut create(CreateRoleIn createRoleIn, RoleRepository roleRepository) throws CreateRoleException, EntityException, ValueObjectException {
 
         try {
-            readRole.findByRoleName(
+            findRoleByRoleName.findByRoleName(
                     new ReadByRoleNameIn(
                             createRoleIn.getRole().getRoleName().getRoleName()
                     ), roleRepository

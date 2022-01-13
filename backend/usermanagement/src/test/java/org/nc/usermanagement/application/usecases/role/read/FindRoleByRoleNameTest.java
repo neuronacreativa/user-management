@@ -19,10 +19,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @Transactional
-class ReadRoleTest {
+class FindRoleByRoleNameTest {
 
     @Autowired
-    private ReadRole readRole;
+    private FindRoleByRoleName findRoleByRoleName;
 
     @Autowired
     private CreateRole createRole;
@@ -42,7 +42,7 @@ class ReadRoleTest {
         );
 
         assertDoesNotThrow(() ->
-                this.readRole.findByRoleName(
+                this.findRoleByRoleName.findByRoleName(
                         new ReadByRoleNameIn("ROLE_USER"),
                         this.dbRoleRepository
                 )
@@ -52,7 +52,7 @@ class ReadRoleTest {
     @Test
     void inValidRoleDoesNotExists() {
         assertThrows(RoleNotFoundException.class, () ->
-                this.readRole.findByRoleName(
+                this.findRoleByRoleName.findByRoleName(
                         new ReadByRoleNameIn("ROLE_NOT_FOUND"),
                         this.dbRoleRepository
                 )
