@@ -11,4 +11,5 @@ public interface RoleRepository {
     Role findByUuid(String uuid) throws EntityException, ValueObjectException, RoleNotFoundException;
     Role findByRoleName(String roleName) throws EntityException, ValueObjectException, RoleNotFoundException;
     void delete(Role role);
+    void update(Role role) throws RoleNotFoundException;
 }

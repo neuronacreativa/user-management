@@ -44,6 +44,12 @@ public class RoleModel {
         );
     }
 
+    public void setRoleModelByRole(Role role) {
+        this.uuid = role.getUuid().getUuid();
+        this.roleName = role.getRoleName().getRoleName();
+        this.priority = role.getPriority().getPriority();
+    }
+
     public int getId() {
         return id;
     }

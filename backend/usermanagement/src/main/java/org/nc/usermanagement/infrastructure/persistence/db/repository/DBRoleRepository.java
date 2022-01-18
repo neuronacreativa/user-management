@@ -49,6 +49,20 @@ public class DBRoleRepository implements RoleRepository {
     }
 
     @Override
+    public void update(Role role) throws RoleNotFoundException {
+        Optional<RoleModel> roleModel = jpaRoleModelRepository.findByUuid(
+                role.getUuid().getUuid()
+        );
+
+        if (roleModel.isEmpty())
+            throw new RoleNotFoundException();
+
+        roleModel.get().setRoleModelByRole(role);
+
+        jpaRoleModelRepository.save(roleModel.get());
+    }
+
+    @Override
     public void delete(Role role) {
         // TODO
     }

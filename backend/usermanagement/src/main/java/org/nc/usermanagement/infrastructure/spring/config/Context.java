@@ -5,6 +5,7 @@ import org.nc.usermanagement.application.usecases.role.delete.DeleteRoleByRoleNa
 import org.nc.usermanagement.application.usecases.role.delete.DeleteRoleByUuid;
 import org.nc.usermanagement.application.usecases.role.read.FindRoleByRoleName;
 import org.nc.usermanagement.application.usecases.role.read.FindRoleByUuid;
+import org.nc.usermanagement.application.usecases.role.update.UpdateRole;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -36,5 +37,10 @@ public class Context {
     @Bean
     public DeleteRoleByUuid getDeleteRoleByUuid() {
         return new DeleteRoleByUuid();
+    }
+
+    @Bean
+    public UpdateRole getUpdateRole() {
+        return new UpdateRole();
     }
 }
