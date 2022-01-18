@@ -64,6 +64,6 @@ public class DBRoleRepository implements RoleRepository {
 
     @Override
     public void delete(Role role) {
-        // TODO
+        jpaRoleModelRepository.delete(new RoleModel(role));
     }
 }

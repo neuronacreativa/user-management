@@ -5,6 +5,8 @@ import org.nc.usermanagement.application.usecases.role.create.CreateRole;
 import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleIn;
 import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleOut;
 import org.nc.usermanagement.application.usecases.role.create.exception.CreateRoleException;
+import org.nc.usermanagement.application.usecases.role.delete.dto.DeleteRoleByUuidIn;
+import org.nc.usermanagement.application.usecases.role.read.exception.RoleNotFoundException;
 import org.nc.usermanagement.application.usecases.role.update.dto.UpdateRoleIn;
 import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
@@ -16,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.transaction.Transactional;
+import java.util.UUID;
 
 @SpringBootTest
 @Transactional
@@ -48,4 +51,17 @@ class UpdateRoleTest {
             )
         );
     }
+
+    @Test
+    void inValidRoleDoesNotExists() {
+        assertThrows(RoleNotFoundException.class, () -> this.updateRole.update(
+                new UpdateRoleIn(
+                        UUID.randomUUID().toString(),
+                        "ROLE_NOT_FOUND",
+                        1000
+                ),
+                dbRoleRepository
+        ));
+    }
+
 }
