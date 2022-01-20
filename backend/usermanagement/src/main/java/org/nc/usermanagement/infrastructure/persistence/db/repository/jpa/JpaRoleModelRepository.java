@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface JpaRoleModelRepository extends JpaRepository<RoleModel, String> {
     Optional<RoleModel> findByUuid(String uuid);
     Optional<RoleModel> findByRoleName(String roleName);
+    Optional<RoleModel> findByUuidAndRoleName(String uuid, String roleName);
+    Optional<RoleModel> findByUuidOrRoleName(String uuid, String roleName);
 }

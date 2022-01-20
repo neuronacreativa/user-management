@@ -1,12 +1,12 @@
-package org.nc.usermanagement.infrastructure.rest.role.controller.create.dto;
+package org.nc.usermanagement.application.usecases.role.read.dto;
 
-public class CreateRoleControllerOut {
+public class FindRoleOut {
 
     private final String uuid;
     private final String roleName;
     private final int priority;
 
-    public CreateRoleControllerOut(String uuid, String roleName, int priority) {
+    public FindRoleOut(String uuid, String roleName, int priority) {
         this.uuid = uuid;
         this.roleName = roleName;
         this.priority = priority;
@@ -23,5 +23,4 @@ public class CreateRoleControllerOut {
     public int getPriority() {
         return priority;
     }
-
 }

@@ -1,4 +1,4 @@
-package org.nc.usermanagement.infrastructure.rest.role.controller.create.dto;
+package org.nc.usermanagement.infrastructure.rest.controller.role.create.dto;
 
 public class CreateRoleControllerIn {
 

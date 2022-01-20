@@ -10,6 +10,7 @@ public interface RoleRepository {
     void save(Role role) throws CreateRoleException;
     Role findByUuid(String uuid) throws EntityException, ValueObjectException, RoleNotFoundException;
     Role findByRoleName(String roleName) throws EntityException, ValueObjectException, RoleNotFoundException;
+    Role findByUuidAndRoleName(String uuid, String roleName) throws EntityException, ValueObjectException, RoleNotFoundException;
     void delete(Role role);
     void update(Role role) throws RoleNotFoundException;
 }

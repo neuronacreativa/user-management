@@ -3,6 +3,7 @@ package org.nc.usermanagement.infrastructure.spring.config;
 import org.nc.usermanagement.application.usecases.role.create.CreateRole;
 import org.nc.usermanagement.application.usecases.role.delete.DeleteRoleByRoleName;
 import org.nc.usermanagement.application.usecases.role.delete.DeleteRoleByUuid;
+import org.nc.usermanagement.application.usecases.role.read.FindRole;
 import org.nc.usermanagement.application.usecases.role.read.FindRoleByRoleName;
 import org.nc.usermanagement.application.usecases.role.read.FindRoleByUuid;
 import org.nc.usermanagement.application.usecases.role.update.UpdateRole;
@@ -17,6 +18,11 @@ public class Context {
         return new CreateRole(
                 getFindRoleByRoleName()
         );
+    }
+
+    @Bean
+    public FindRole getFindRole() {
+        return new FindRole();
     }
 
     @Bean
