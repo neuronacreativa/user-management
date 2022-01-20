@@ -2,7 +2,7 @@ package org.nc.usermanagement.infrastructure.rest.role.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.nc.usermanagement.infrastructure.rest.role.controller.create.dto.CreateRoleControllerIn;
+import org.nc.usermanagement.infrastructure.rest.controller.role.create.dto.CreateRoleControllerIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
