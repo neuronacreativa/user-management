@@ -1,0 +1,12 @@
+{
+    role(uuid: "secondUuid") {
+        uuid
+        roleName
+        priority
+    }
+    allRoles{
+        uuid
+        roleName
+        priority
+    }
+}

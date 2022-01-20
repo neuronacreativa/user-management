@@ -1,5 +1,6 @@
 package org.nc.usermanagement.infrastructure.persistence.db.model;
 
+import lombok.Builder;
 import org.nc.usermanagement.domain.entity.Role;
 import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
@@ -7,6 +8,7 @@ import org.nc.usermanagement.domain.exception.ValueObjectException;
 import javax.persistence.*;
 
 @Entity
+@Builder
 @Table(name = "USER_ROLE")
 public class RoleModel {
 
@@ -28,6 +30,14 @@ public class RoleModel {
     private UserModel userModel;
 
     public RoleModel() {
+    }
+
+    public RoleModel(int id, String uuid, String roleName, int priority, UserModel userModel) {
+        this.id = id;
+        this.uuid = uuid;
+        this.roleName = roleName;
+        this.priority = priority;
+        this.userModel = userModel;
     }
 
     public RoleModel(Role role) {

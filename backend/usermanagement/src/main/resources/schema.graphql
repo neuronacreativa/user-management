@@ -1,0 +1,12 @@
+schema{
+  query:Query
+}
+type Query{
+  allRoles: [Role]
+  role(uuid: String): Role
+}
+type Role{
+  uuid:String
+  roleName:String
+  priority:Int
+}
