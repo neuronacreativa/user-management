@@ -14,12 +14,13 @@ public class RoleModel {
 
     @Id
     @Column(name = "ID", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "UUID", unique = true, nullable = false, length = 40)
     private String uuid;
 
-    @Column(name = "NAME", nullable = false, length = 20)
+    @Column(name = "NAME", unique = true, nullable = false, length = 20)
     private String roleName;
 
     @Column(name = "PRIORITY", nullable = false)
