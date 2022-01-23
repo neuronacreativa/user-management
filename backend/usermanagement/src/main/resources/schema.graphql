@@ -1,12 +1,14 @@
 schema{
   query:Query
 }
-type Query{
-  allRoles: [Role]
-  role(uuid: String): Role
-}
+
 type Role{
   uuid:String
   roleName:String
   priority:Int
+}
+
+type Query{
+  allRoles(page: Int = 0, pageSize: Int = 0, orderType: String): [Role]
+  role(uuid: String): Role
 }
