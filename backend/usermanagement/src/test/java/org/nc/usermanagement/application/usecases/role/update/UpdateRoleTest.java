@@ -5,7 +5,6 @@ import org.nc.usermanagement.application.usecases.role.create.CreateRole;
 import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleIn;
 import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleOut;
 import org.nc.usermanagement.application.usecases.role.create.exception.CreateRoleException;
-import org.nc.usermanagement.application.usecases.role.delete.dto.DeleteRoleByUuidIn;
 import org.nc.usermanagement.application.usecases.role.read.exception.RoleNotFoundException;
 import org.nc.usermanagement.application.usecases.role.update.dto.UpdateRoleIn;
 import org.nc.usermanagement.domain.exception.EntityException;

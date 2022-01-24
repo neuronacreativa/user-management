@@ -1,7 +1,6 @@
 package org.nc.usermanagement.infrastructure.persistence.db.repository.jpa;
 
 import org.nc.usermanagement.infrastructure.persistence.db.model.RoleModel;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
