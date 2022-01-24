@@ -16,7 +16,7 @@ public class ReadRoleController {
     private GraphQL graphQL;
 
     @PostMapping("roles/find")
-    public ResponseEntity<Object> movies(@RequestBody String query) {
+    public ResponseEntity<Object> roles(@RequestBody String query) {
         ExecutionResult execute = graphQL.execute(query);
         return new ResponseEntity<>(execute, HttpStatus.OK);
     }
