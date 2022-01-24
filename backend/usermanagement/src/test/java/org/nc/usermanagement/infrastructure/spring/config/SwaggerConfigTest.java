@@ -21,7 +21,7 @@ class SwaggerConfigTest {
     @Test
     public void generateSwagger() throws Exception {
         MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
-        mockMvc.perform(MockMvcRequestBuilders.get("/v2/api-docs").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.get("/v3/api-docs").accept(MediaType.APPLICATION_JSON))
                 .andDo((result) ->
                     FileUtils.writeStringToFile(
                         new File("swagger-userManagement.json"),
