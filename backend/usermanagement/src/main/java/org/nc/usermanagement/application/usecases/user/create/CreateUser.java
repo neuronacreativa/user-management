@@ -19,19 +19,23 @@ public class CreateUser {
 
     public CreateUserOut create(CreateUserIn createUserIn, UserRepository userRepository, RoleRepository roleRepository) throws UseCaseException, EntityException, ValueObjectException {
 
-        List<Role> roleList = new ArrayList<>();
+        List<Role> roleList;
+        List<String> roleUuidStringList = new ArrayList<>();
 
         for (ReadByUuidIn readByUuidIn : createUserIn.getReadByUuidIns()) {
-            try {
-                roleList.add(
-                        roleRepository.findByUuid(
-                                readByUuidIn.getUuid().getUuid()
-                        )
-                );
-            } catch (EntityException | ValueObjectException | RoleNotFoundException e) {
-                throw new UseCaseException(e);
-            }
+            roleUuidStringList.add(
+                    readByUuidIn.getUuid().getUuid()
+            );
         }
+
+        roleList = roleRepository.findByUuidIn(
+                roleUuidStringList
+        );
+
+        if (roleList.size() != roleUuidStringList.size())
+            throw new RoleNotFoundException();
+
+        // TODO: User Name has to be unique
 
         userRepository.save(
                 new User(

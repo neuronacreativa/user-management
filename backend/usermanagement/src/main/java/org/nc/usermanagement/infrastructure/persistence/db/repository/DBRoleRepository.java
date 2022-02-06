@@ -11,6 +11,8 @@ import org.nc.usermanagement.infrastructure.persistence.db.repository.jpa.JpaRol
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -39,18 +41,25 @@ public class DBRoleRepository implements RoleRepository {
     }
 
     @Override
-    public Role findByRoleName(String roleName) throws EntityException, ValueObjectException, RoleNotFoundException {
-        Optional<RoleModel> roleModel = jpaRoleModelRepository.findByRoleName(roleName);
+    public List<Role> findByUuidIn(List<String> uuids) throws EntityException, ValueObjectException, RoleNotFoundException {
+        List<RoleModel> roleModels = jpaRoleModelRepository.findByUuidIn(uuids);
 
-        if (roleModel.isEmpty())
+        if (roleModels.isEmpty())
             throw new RoleNotFoundException();
 
-        return roleModel.get().getRole();
+        List<Role> roles = new ArrayList<>();
+        for (RoleModel roleModel : roleModels) {
+            roles.add(
+                    roleModel.getRole()
+            );
+        }
+
+        return roles;
     }
 
     @Override
-    public Role findByUuidAndRoleName(String uuid, String roleName) throws EntityException, ValueObjectException, RoleNotFoundException {
-        Optional<RoleModel> roleModel = jpaRoleModelRepository.findByUuidOrRoleName(uuid, roleName);
+    public Role findByRoleName(String roleName) throws EntityException, ValueObjectException, RoleNotFoundException {
+        Optional<RoleModel> roleModel = jpaRoleModelRepository.findByRoleName(roleName);
 
         if (roleModel.isEmpty())
             throw new RoleNotFoundException();
