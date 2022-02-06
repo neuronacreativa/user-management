@@ -7,7 +7,8 @@ import org.nc.usermanagement.application.usecases.role.update.dto.UpdateRoleOut;
 
 public class UpdateRole {
 
-    public UpdateRoleOut update(UpdateRoleIn updateRoleIn, RoleRepository roleRepository) throws RoleNotFoundException {
+    public UpdateRoleOut update(UpdateRoleIn updateRoleIn, RoleRepository roleRepository)
+            throws RoleNotFoundException {
 
         roleRepository.update(
                 updateRoleIn.getRole()

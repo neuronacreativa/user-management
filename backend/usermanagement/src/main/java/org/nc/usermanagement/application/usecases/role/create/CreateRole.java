@@ -19,7 +19,8 @@ public class CreateRole {
         this.findRoleByRoleName = findRoleByRoleName;
     }
 
-    public CreateRoleOut create(CreateRoleIn createRoleIn, RoleRepository roleRepository) throws CreateRoleException, EntityException, ValueObjectException {
+    public CreateRoleOut create(CreateRoleIn createRoleIn, RoleRepository roleRepository)
+            throws CreateRoleException, EntityException, ValueObjectException {
 
         try {
             findRoleByRoleName.findByRoleName(
