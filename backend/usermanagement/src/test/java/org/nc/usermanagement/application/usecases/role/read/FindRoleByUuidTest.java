@@ -5,7 +5,7 @@ import org.nc.usermanagement.application.usecases.role.create.CreateRole;
 import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleIn;
 import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleOut;
 import org.nc.usermanagement.application.usecases.role.create.exception.CreateRoleException;
-import org.nc.usermanagement.application.usecases.role.read.dto.ReadByUuidIn;
+import org.nc.usermanagement.application.usecases.role.read.dto.FindRoleByUuidIn;
 import org.nc.usermanagement.application.usecases.role.read.exception.RoleNotFoundException;
 import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
@@ -46,7 +46,7 @@ class FindRoleByUuidTest {
 
         assertDoesNotThrow(() ->
                 this.findRoleByUuid.findRoleByUuid(
-                        new ReadByUuidIn(createRoleOut.getUuid()),
+                        new FindRoleByUuidIn(createRoleOut.getUuid()),
                         this.dbRoleRepository
                 )
         );
@@ -56,7 +56,7 @@ class FindRoleByUuidTest {
     void inValidRoleDoesNotExists() {
         assertThrows(RoleNotFoundException.class, () ->
                 this.findRoleByUuid.findRoleByUuid(
-                        new ReadByUuidIn(UUID.randomUUID().toString()),
+                        new FindRoleByUuidIn(UUID.randomUUID().toString()),
                         this.dbRoleRepository
                 )
         );

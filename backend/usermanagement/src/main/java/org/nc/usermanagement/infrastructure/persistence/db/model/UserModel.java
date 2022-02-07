@@ -1,6 +1,9 @@
 package org.nc.usermanagement.infrastructure.persistence.db.model;
 
+import org.nc.usermanagement.domain.entity.Role;
 import org.nc.usermanagement.domain.entity.User;
+import org.nc.usermanagement.domain.exception.EntityException;
+import org.nc.usermanagement.domain.exception.ValueObjectException;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -25,6 +28,8 @@ public class UserModel {
 
     @Column(name = "EMAIL", nullable = false, length = 100)
     private String email;
+
+    // TODO: One role has many users
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userModel")
     private List<RoleModel> roleModels;
@@ -93,5 +98,22 @@ public class UserModel {
 
     public void setRoleModels(List<RoleModel> roleModels) {
         this.roleModels = roleModels;
+    }
+
+    public User getUser() throws EntityException, ValueObjectException {
+
+        List<Role> roles = new ArrayList<>();
+
+        for (RoleModel roleModel : this.getRoleModels()) {
+            roles.add(roleModel.getRole());
+        }
+
+        return new User(
+                this.getUuid(),
+                this.getUserName(),
+                this.getPassword(),
+                this.getEmail(),
+                roles
+        );
     }
 }

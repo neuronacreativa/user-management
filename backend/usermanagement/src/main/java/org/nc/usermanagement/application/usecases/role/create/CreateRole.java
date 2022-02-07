@@ -6,7 +6,7 @@ import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleOut;
 import org.nc.usermanagement.application.usecases.role.create.exception.CreateRoleException;
 import org.nc.usermanagement.application.usecases.role.create.exception.RoleAlreadyExistsException;
 import org.nc.usermanagement.application.usecases.role.read.FindRoleByRoleName;
-import org.nc.usermanagement.application.usecases.role.read.dto.ReadByRoleNameIn;
+import org.nc.usermanagement.application.usecases.role.read.dto.FindRoleByRoleNameIn;
 import org.nc.usermanagement.application.usecases.role.read.exception.RoleNotFoundException;
 import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
@@ -24,7 +24,7 @@ public class CreateRole {
 
         try {
             findRoleByRoleName.findByRoleName(
-                    new ReadByRoleNameIn(
+                    new FindRoleByRoleNameIn(
                             createRoleIn.getRole().getRoleName().getRoleName()
                     ), roleRepository
             );

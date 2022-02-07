@@ -2,11 +2,14 @@ package org.nc.usermanagement.application.usecases.user.create;
 
 import org.nc.usermanagement.application.usecases.UseCaseException;
 import org.nc.usermanagement.application.usecases.role.RoleRepository;
-import org.nc.usermanagement.application.usecases.role.read.dto.ReadByUuidIn;
+import org.nc.usermanagement.application.usecases.role.read.dto.FindRoleByUuidIn;
 import org.nc.usermanagement.application.usecases.role.read.exception.RoleNotFoundException;
 import org.nc.usermanagement.application.usecases.user.UserRepository;
 import org.nc.usermanagement.application.usecases.user.create.dto.CreateUserIn;
 import org.nc.usermanagement.application.usecases.user.create.dto.CreateUserOut;
+import org.nc.usermanagement.application.usecases.user.read.FindUserByUserName;
+import org.nc.usermanagement.application.usecases.user.read.dto.FindUserByUserNameIn;
+import org.nc.usermanagement.application.usecases.user.read.exception.UserNotFoundException;
 import org.nc.usermanagement.domain.entity.Role;
 import org.nc.usermanagement.domain.entity.User;
 import org.nc.usermanagement.domain.exception.EntityException;
@@ -17,14 +20,20 @@ import java.util.List;
 
 public class CreateUser {
 
+    private final FindUserByUserName findUserByUserName;
+
+    public CreateUser(FindUserByUserName findUserByUserName) {
+        this.findUserByUserName = findUserByUserName;
+    }
+
     public CreateUserOut create(CreateUserIn createUserIn, UserRepository userRepository, RoleRepository roleRepository) throws UseCaseException, EntityException, ValueObjectException {
 
         List<Role> roleList;
         List<String> roleUuidStringList = new ArrayList<>();
 
-        for (ReadByUuidIn readByUuidIn : createUserIn.getReadByUuidIns()) {
+        for (FindRoleByUuidIn findRoleByUuidIn : createUserIn.getReadByUuidIns()) {
             roleUuidStringList.add(
-                    readByUuidIn.getUuid().getUuid()
+                    findRoleByUuidIn.getUuid().getUuid()
             );
         }
 
@@ -35,7 +44,15 @@ public class CreateUser {
         if (roleList.size() != roleUuidStringList.size())
             throw new RoleNotFoundException();
 
-        // TODO: User Name has to be unique
+        try {
+            findUserByUserName.findUserByUserName(
+                    new FindUserByUserNameIn(
+                            createUserIn.getUserName().getUserName()
+                    ), userRepository
+            );
+        } catch (UserNotFoundException ignored) {
+
+        }
 
         userRepository.save(
                 new User(

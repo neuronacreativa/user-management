@@ -1,6 +1,6 @@
 package org.nc.usermanagement.application.usecases.user.create.dto;
 
-import org.nc.usermanagement.application.usecases.role.read.dto.ReadByUuidIn;
+import org.nc.usermanagement.application.usecases.role.read.dto.FindRoleByUuidIn;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
 import org.nc.usermanagement.domain.valueObjects.shared.Uuid;
 import org.nc.usermanagement.domain.valueObjects.user.Email;
@@ -16,14 +16,14 @@ public class CreateUserIn {
     private final UserName userName;
     private final Password password;
     private final Email email;
-    private final List<ReadByUuidIn> readByUuidIns;
+    private final List<FindRoleByUuidIn> findRoleByUuidIns;
 
-    public CreateUserIn(String userName, String password, String email, List<ReadByUuidIn> readByUuidIns) throws ValueObjectException {
+    public CreateUserIn(String userName, String password, String email, List<FindRoleByUuidIn> findRoleByUuidIns) throws ValueObjectException {
         this.uuid = new Uuid(UUID.randomUUID().toString());
         this.userName = new UserName(userName);
         this.password = new Password(password);
         this.email = new Email(email);
-        this.readByUuidIns = readByUuidIns;
+        this.findRoleByUuidIns = findRoleByUuidIns;
     }
 
     public Uuid getUuid() {
@@ -42,7 +42,7 @@ public class CreateUserIn {
         return email;
     }
 
-    public List<ReadByUuidIn> getReadByUuidIns() {
-        return readByUuidIns;
+    public List<FindRoleByUuidIn> getReadByUuidIns() {
+        return findRoleByUuidIns;
     }
 }

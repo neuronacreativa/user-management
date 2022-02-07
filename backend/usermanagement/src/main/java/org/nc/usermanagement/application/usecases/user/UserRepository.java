@@ -1,10 +1,12 @@
 package org.nc.usermanagement.application.usecases.user;
 
-import org.nc.usermanagement.domain.entity.Role;
+import org.nc.usermanagement.application.usecases.user.read.exception.UserNotFoundException;
 import org.nc.usermanagement.domain.entity.User;
+import org.nc.usermanagement.domain.exception.EntityException;
+import org.nc.usermanagement.domain.exception.ValueObjectException;
 
 public interface UserRepository {
     void save(User user);
-    Role findByUuid(String uuid);
-    Role findByUserName(String roleName);
+    User findByUuid(String uuid);
+    User findByUserName(String roleName) throws UserNotFoundException, EntityException, ValueObjectException;
 }

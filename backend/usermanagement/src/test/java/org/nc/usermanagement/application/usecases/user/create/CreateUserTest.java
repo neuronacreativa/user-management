@@ -6,7 +6,7 @@ import org.nc.usermanagement.application.usecases.role.create.CreateRole;
 import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleIn;
 import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleOut;
 import org.nc.usermanagement.application.usecases.role.create.exception.CreateRoleException;
-import org.nc.usermanagement.application.usecases.role.read.dto.ReadByUuidIn;
+import org.nc.usermanagement.application.usecases.role.read.dto.FindRoleByUuidIn;
 import org.nc.usermanagement.application.usecases.role.read.exception.RoleNotFoundException;
 import org.nc.usermanagement.application.usecases.user.create.dto.CreateUserIn;
 import org.nc.usermanagement.domain.exception.EntityException;
@@ -43,7 +43,7 @@ class CreateUserTest {
     @Test
     void valid() throws UseCaseException, EntityException, ValueObjectException {
 
-        List<ReadByUuidIn> readByUuidIns = new ArrayList<>();
+        List<FindRoleByUuidIn> findRoleByUuidIns = new ArrayList<>();
 
         CreateRoleOut createRoleOut = this.createRole.create(
                 new CreateRoleIn(
@@ -51,8 +51,8 @@ class CreateUserTest {
                 ), dbRoleRepository
         );
 
-        readByUuidIns.add(
-                new ReadByUuidIn(
+        findRoleByUuidIns.add(
+                new FindRoleByUuidIn(
                         createRoleOut.getUuid()
                 )
         );
@@ -63,8 +63,8 @@ class CreateUserTest {
                 ), dbRoleRepository
         );
 
-        readByUuidIns.add(
-                new ReadByUuidIn(
+        findRoleByUuidIns.add(
+                new FindRoleByUuidIn(
                         createRoleOut.getUuid()
                 )
         );
@@ -75,7 +75,7 @@ class CreateUserTest {
                             "user.name",
                             "validPassword123!",
                             "user.name@example.org",
-                                readByUuidIns
+                                findRoleByUuidIns
                         ), dbUserRepository, dbRoleRepository
                 )
         );
@@ -83,7 +83,7 @@ class CreateUserTest {
 
     @Test
     void inValidRoleNotExists() throws CreateRoleException, ValueObjectException, EntityException {
-        List<ReadByUuidIn> readByUuidIns = new ArrayList<>();
+        List<FindRoleByUuidIn> findRoleByUuidIns = new ArrayList<>();
 
         CreateRoleOut createRoleOut = this.createRole.create(
                 new CreateRoleIn(
@@ -91,14 +91,14 @@ class CreateUserTest {
                 ), dbRoleRepository
         );
 
-        readByUuidIns.add(
-                new ReadByUuidIn(
+        findRoleByUuidIns.add(
+                new FindRoleByUuidIn(
                         createRoleOut.getUuid()
                 )
         );
 
-        readByUuidIns.add(
-                new ReadByUuidIn(
+        findRoleByUuidIns.add(
+                new FindRoleByUuidIn(
                         UUID.randomUUID().toString()
                 )
         );
@@ -109,7 +109,7 @@ class CreateUserTest {
                                 "user.name",
                                 "validPassword123!",
                                 "user.name@example.org",
-                                readByUuidIns
+                                findRoleByUuidIns
                         ), dbUserRepository, dbRoleRepository
                 )
         );

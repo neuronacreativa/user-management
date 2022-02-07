@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.nc.usermanagement.application.usecases.role.create.CreateRole;
 import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleIn;
 import org.nc.usermanagement.application.usecases.role.create.exception.CreateRoleException;
-import org.nc.usermanagement.application.usecases.role.read.dto.ReadByRoleNameIn;
+import org.nc.usermanagement.application.usecases.role.read.dto.FindRoleByRoleNameIn;
 import org.nc.usermanagement.application.usecases.role.read.exception.RoleNotFoundException;
 import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
@@ -43,7 +43,7 @@ class FindRoleByRoleNameTest {
 
         assertDoesNotThrow(() ->
                 this.findRoleByRoleName.findByRoleName(
-                        new ReadByRoleNameIn("ROLE_USER"),
+                        new FindRoleByRoleNameIn("ROLE_USER"),
                         this.dbRoleRepository
                 )
         );
@@ -53,7 +53,7 @@ class FindRoleByRoleNameTest {
     void inValidRoleDoesNotExists() {
         assertThrows(RoleNotFoundException.class, () ->
                 this.findRoleByRoleName.findByRoleName(
-                        new ReadByRoleNameIn("ROLE_NOT_FOUND"),
+                        new FindRoleByRoleNameIn("ROLE_NOT_FOUND"),
                         this.dbRoleRepository
                 )
         );
