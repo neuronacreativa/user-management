@@ -6,6 +6,7 @@ import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Builder
@@ -26,19 +27,18 @@ public class RoleModel {
     @Column(name = "PRIORITY", nullable = false)
     private int priority;
 
-    @ManyToOne
-    @JoinColumn(name = "FK_ROLE_USER")
-    private UserModel userModel;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleModel")
+    private List<UserModel> userModels;
 
     public RoleModel() {
     }
 
-    public RoleModel(int id, String uuid, String roleName, int priority, UserModel userModel) {
+    public RoleModel(int id, String uuid, String roleName, int priority, List<UserModel> userModels) {
         this.id = id;
         this.uuid = uuid;
         this.roleName = roleName;
         this.priority = priority;
-        this.userModel = userModel;
+        this.userModels = userModels;
     }
 
     public RoleModel(Role role) {
@@ -48,10 +48,11 @@ public class RoleModel {
     }
 
     public Role getRole() throws ValueObjectException, EntityException {
+        // TODO: get Users from UserModels
         return new Role(
                 this.getUuid(),
                 this.getRoleName(),
-                this.getPriority()
+                this.getPriority(), null
         );
     }
 
@@ -93,11 +94,11 @@ public class RoleModel {
         this.priority = priority;
     }
 
-    public UserModel getUserModel() {
-        return userModel;
+    public List<UserModel> getUserModels() {
+        return userModels;
     }
 
-    public void setUserModel(UserModel userModel) {
-        this.userModel = userModel;
+    public void setUserModels(List<UserModel> userModels) {
+        this.userModels = userModels;
     }
 }

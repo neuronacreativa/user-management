@@ -5,25 +5,16 @@ import org.junit.jupiter.api.Test;
 import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 class UserTest {
 
-    private List<Role> getRoles() throws EntityException, ValueObjectException {
-        List<Role> roleList = new ArrayList<>();
-        Role role = new Role(
+    private Role getRole() throws EntityException, ValueObjectException {
+        return new Role(
                 UUID.randomUUID().toString(),
                 "ROLE_SUPER_ADMIN",
-                0
+                0, null
         );
-        roleList.add(role);
-        return roleList;
-    }
-
-    private List<Role> getRolesEmpty() {
-        return new ArrayList<>();
     }
 
     @Test
@@ -34,7 +25,7 @@ class UserTest {
                     "user.test",
                     "A~$^+=<>a1",
                     "user.example@test.org",
-                    getRoles()
+                    getRole()
             );
         });
     }
@@ -47,14 +38,14 @@ class UserTest {
                     null,
                     "A~$^+=<>a1",
                     "user.example@test.org",
-                    getRoles()
+                    getRole()
             );
             new User(
                     UUID.randomUUID().toString(),
                     " ",
                     "A~$^+=<>a1",
                     "user.example@test.org",
-                    getRoles()
+                    getRole()
             );
         });
     }
@@ -67,14 +58,14 @@ class UserTest {
                     "user.test",
                     null,
                     "user.example@test.org",
-                    getRoles()
+                    getRole()
             );
             new User(
                     UUID.randomUUID().toString(),
                     "user.test",
                     " ",
                     "user.example@test.org",
-                    getRoles()
+                    getRole()
             );
         });
     }
@@ -87,14 +78,14 @@ class UserTest {
                     "user.test",
                     "A~$^+=<>a1",
                     null,
-                    getRoles()
+                    getRole()
             );
             new User(
                     UUID.randomUUID().toString(),
                     "user.test",
                     "A~$^+=<>a1",
                     " ",
-                    getRoles()
+                    getRole()
             );
         });
     }
@@ -107,7 +98,7 @@ class UserTest {
                     "user.test",
                     "A~$^+=<>a1",
                     "user.example@test.org",
-                    getRolesEmpty()
+                    null
             )
         );
     }
@@ -120,7 +111,7 @@ class UserTest {
                     "user.test",
                     "A~$^+=<>a1",
                     "user.example@test.org",
-                    getRoles()
+                    getRole()
             );
             user.sameIdentityAs(
                     new User(
@@ -128,7 +119,7 @@ class UserTest {
                             user.getUserName().getUserName(),
                             user.getPassword().getPassword(),
                             user.getEmail().getEmail(),
-                            user.getRoles()
+                            user.getRole()
                     )
             );
         });

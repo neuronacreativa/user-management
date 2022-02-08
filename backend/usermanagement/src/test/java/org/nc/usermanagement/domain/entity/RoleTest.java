@@ -17,7 +17,7 @@ class RoleTest {
             new Role(
                     UUID.randomUUID().toString(),
                     "ROLE_SUPER_ADMIN",
-                    0
+                    0, null
             );
         });
     }
@@ -43,7 +43,7 @@ class RoleTest {
                 new Role(
                         UUID.randomUUID().toString(),
                         roleName,
-                        0
+                        0, null
                 )
         );
     }
@@ -55,7 +55,7 @@ class RoleTest {
                 new Role(
                         uuid,
                         "SUPER_ADMIN",
-                        0
+                        0, null
                 )
         );
     }
@@ -66,13 +66,13 @@ class RoleTest {
             Role role = new Role(
                     UUID.randomUUID().toString(),
                     "ROLE_SUPER_ADMIN",
-                    0
+                    0, null
             );
             role.sameIdentityAs(
                     new Role(
                             role.getUuid().getUuid(),
                             role.getRoleName().getRoleName(),
-                            role.getPriority().getPriority()
+                            role.getPriority().getPriority(), null
                     )
             );
         });

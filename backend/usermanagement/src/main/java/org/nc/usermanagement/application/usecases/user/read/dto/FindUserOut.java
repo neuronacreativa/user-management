@@ -12,22 +12,14 @@ public class FindUserOut {
     private final String userName;
     private final String password;
     private final String email;
-    private final List<FindRoleOut> roles;
+    private final FindRoleOut role;
 
     public FindUserOut(User user) {
         this.uuid = user.getUuid().getUuid();
         this.userName = user.getUserName().getUserName();
         this.password = user.getPassword().getPassword();
         this.email = user.getEmail().getEmail();
-
-        List<FindRoleOut> findRoleOutList = new ArrayList<>();
-
-        for (Role role : user.getRoles()) {
-            findRoleOutList.add(
-                    new FindRoleOut(role)
-            );
-        }
-        this.roles = findRoleOutList;
+        this.role = new FindRoleOut(user.getRole());
     }
 
     public String getUuid() {
@@ -46,7 +38,7 @@ public class FindUserOut {
         return email;
     }
 
-    public List<FindRoleOut> getRoles() {
-        return roles;
+    public FindRoleOut getRole() {
+        return role;
     }
 }

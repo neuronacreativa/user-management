@@ -5,7 +5,6 @@ import org.nc.usermanagement.application.usecases.UseCaseException;
 import org.nc.usermanagement.application.usecases.role.create.CreateRole;
 import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleIn;
 import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleOut;
-import org.nc.usermanagement.application.usecases.role.create.exception.CreateRoleException;
 import org.nc.usermanagement.application.usecases.role.read.dto.FindRoleByUuidIn;
 import org.nc.usermanagement.application.usecases.role.read.exception.RoleNotFoundException;
 import org.nc.usermanagement.application.usecases.user.create.dto.CreateUserIn;
@@ -17,8 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -43,31 +40,13 @@ class CreateUserTest {
     @Test
     void valid() throws UseCaseException, EntityException, ValueObjectException {
 
-        List<FindRoleByUuidIn> findRoleByUuidIns = new ArrayList<>();
-
         CreateRoleOut createRoleOut = this.createRole.create(
                 new CreateRoleIn(
                         "ROLE_SUPER_ADMIN", 0
                 ), dbRoleRepository
         );
 
-        findRoleByUuidIns.add(
-                new FindRoleByUuidIn(
-                        createRoleOut.getUuid()
-                )
-        );
-
-        createRoleOut = this.createRole.create(
-                new CreateRoleIn(
-                        "ROLE_USER", 1
-                ), dbRoleRepository
-        );
-
-        findRoleByUuidIns.add(
-                new FindRoleByUuidIn(
-                        createRoleOut.getUuid()
-                )
-        );
+        FindRoleByUuidIn findRoleByUuidIn = new FindRoleByUuidIn(createRoleOut.getUuid());
 
         assertDoesNotThrow(() ->
                 this.createUser.create(
@@ -75,33 +54,16 @@ class CreateUserTest {
                             "user.name",
                             "validPassword123!",
                             "user.name@example.org",
-                                findRoleByUuidIns
+                                findRoleByUuidIn
                         ), dbUserRepository, dbRoleRepository
                 )
         );
     }
 
     @Test
-    void inValidRoleNotExists() throws CreateRoleException, ValueObjectException, EntityException {
-        List<FindRoleByUuidIn> findRoleByUuidIns = new ArrayList<>();
+    void inValidRoleNotExists() throws ValueObjectException {
 
-        CreateRoleOut createRoleOut = this.createRole.create(
-                new CreateRoleIn(
-                        "ROLE_SUPER_ADMIN", 0
-                ), dbRoleRepository
-        );
-
-        findRoleByUuidIns.add(
-                new FindRoleByUuidIn(
-                        createRoleOut.getUuid()
-                )
-        );
-
-        findRoleByUuidIns.add(
-                new FindRoleByUuidIn(
-                        UUID.randomUUID().toString()
-                )
-        );
+        FindRoleByUuidIn findRoleByUuidIn = new FindRoleByUuidIn(UUID.randomUUID().toString());
 
         assertThrows(RoleNotFoundException.class, () ->
                 this.createUser.create(
@@ -109,7 +71,7 @@ class CreateUserTest {
                                 "user.name",
                                 "validPassword123!",
                                 "user.name@example.org",
-                                findRoleByUuidIns
+                                findRoleByUuidIn
                         ), dbUserRepository, dbRoleRepository
                 )
         );

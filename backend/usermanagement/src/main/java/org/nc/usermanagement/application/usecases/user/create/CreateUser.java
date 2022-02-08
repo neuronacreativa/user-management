@@ -28,21 +28,7 @@ public class CreateUser {
 
     public CreateUserOut create(CreateUserIn createUserIn, UserRepository userRepository, RoleRepository roleRepository) throws UseCaseException, EntityException, ValueObjectException {
 
-        List<Role> roleList;
-        List<String> roleUuidStringList = new ArrayList<>();
-
-        for (FindRoleByUuidIn findRoleByUuidIn : createUserIn.getReadByUuidIns()) {
-            roleUuidStringList.add(
-                    findRoleByUuidIn.getUuid().getUuid()
-            );
-        }
-
-        roleList = roleRepository.findByUuidIn(
-                roleUuidStringList
-        );
-
-        if (roleList.size() != roleUuidStringList.size())
-            throw new RoleNotFoundException();
+        Role role = roleRepository.findByUuid(createUserIn.getReadByUuidIns().getUuid().getUuid());
 
         try {
             findUserByUserName.findUserByUserName(
@@ -51,18 +37,16 @@ public class CreateUser {
                     ), userRepository
             );
         } catch (UserNotFoundException ignored) {
-
+            userRepository.save(
+                    new User(
+                            createUserIn.getUuid().getUuid(),
+                            createUserIn.getUserName().getUserName(),
+                            createUserIn.getPassword().getPassword(),
+                            createUserIn.getEmail().getEmail(),
+                            role
+                    )
+            );
         }
-
-        userRepository.save(
-                new User(
-                        createUserIn.getUuid().getUuid(),
-                        createUserIn.getUserName().getUserName(),
-                        createUserIn.getPassword().getPassword(),
-                        createUserIn.getEmail().getEmail(),
-                        roleList
-                )
-        );
 
         return new CreateUserOut(createUserIn);
     }

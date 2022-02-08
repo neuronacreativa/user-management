@@ -16,18 +16,18 @@ public class User implements Entity<User> {
     private final UserName userName;
     private final Password password;
     private final Email email;
-    private final List<Role> roles;
+    private final Role role;
 
-    public User(String uuid, String userName, String password, String email, List<Role> roles) throws ValueObjectException, EntityException {
-        isValid(userName, password, email, roles);
+    public User(String uuid, String userName, String password, String email, Role role) throws ValueObjectException, EntityException {
+        isValid(userName, password, email, role);
         this.uuid = new Uuid(uuid);
         this.userName = new UserName(userName);
         this.password = new Password(password);
         this.email = new Email(email);
-        this.roles = roles;
+        this.role = role;
     }
 
-    private void isValid(String userName, String password, String email, List<Role> roles) throws EntityException {
+    private void isValid(String userName, String password, String email, Role role) throws EntityException {
         if (userName == null || userName.trim().length() == 0) {
             throw new EntityException("userManagement.entity.ko.user.userNameRequired");
         }
@@ -37,8 +37,8 @@ public class User implements Entity<User> {
         if (email == null || email.trim().length() == 0) {
             throw new EntityException("userManagement.entity.ko.user.emailRequired");
         }
-        if (roles.isEmpty()) {
-            throw new EntityException("userManagement.entity.ko.user.rolesRequired");
+        if (role == null) {
+            throw new EntityException("userManagement.entity.ko.user.roleRequired");
         }
     }
 
@@ -58,8 +58,8 @@ public class User implements Entity<User> {
         return email;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
     @Override

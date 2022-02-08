@@ -1,13 +1,10 @@
 package org.nc.usermanagement.infrastructure.persistence.db.model;
 
-import org.nc.usermanagement.domain.entity.Role;
 import org.nc.usermanagement.domain.entity.User;
 import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "USER")
@@ -31,8 +28,9 @@ public class UserModel {
 
     // TODO: One role has many users
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userModel")
-    private List<RoleModel> roleModels;
+    @ManyToOne
+    @JoinColumn(name = "FK_USER_ROLE")
+    private RoleModel roleModel;
 
     public UserModel() {
     }
@@ -42,14 +40,7 @@ public class UserModel {
         this.userName = user.getUserName().getUserName();
         this.password = user.getPassword().getPassword();
         this.email = user.getEmail().getEmail();
-
-        List<RoleModel> roleModelList = new ArrayList<>();
-        user.getRoles().forEach((r) ->
-            roleModelList.add(
-                    new RoleModel(r)
-            )
-        );
-        this.roleModels = roleModelList;
+        this.roleModel = new RoleModel(user.getRole());
     }
 
     public int getId() {
@@ -92,28 +83,22 @@ public class UserModel {
         this.email = email;
     }
 
-    public List<RoleModel> getRoleModels() {
-        return roleModels;
+    public RoleModel getRoleModel() {
+        return roleModel;
     }
 
-    public void setRoleModels(List<RoleModel> roleModels) {
-        this.roleModels = roleModels;
+    public void setRoleModel(RoleModel roleModel) {
+        this.roleModel = roleModel;
     }
 
     public User getUser() throws EntityException, ValueObjectException {
-
-        List<Role> roles = new ArrayList<>();
-
-        for (RoleModel roleModel : this.getRoleModels()) {
-            roles.add(roleModel.getRole());
-        }
 
         return new User(
                 this.getUuid(),
                 this.getUserName(),
                 this.getPassword(),
                 this.getEmail(),
-                roles
+                this.getRoleModel().getRole()
         );
     }
 }

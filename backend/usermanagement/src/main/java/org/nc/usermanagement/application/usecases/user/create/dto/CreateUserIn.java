@@ -16,9 +16,9 @@ public class CreateUserIn {
     private final UserName userName;
     private final Password password;
     private final Email email;
-    private final List<FindRoleByUuidIn> findRoleByUuidIns;
+    private final FindRoleByUuidIn findRoleByUuidIns;
 
-    public CreateUserIn(String userName, String password, String email, List<FindRoleByUuidIn> findRoleByUuidIns) throws ValueObjectException {
+    public CreateUserIn(String userName, String password, String email, FindRoleByUuidIn findRoleByUuidIns) throws ValueObjectException {
         this.uuid = new Uuid(UUID.randomUUID().toString());
         this.userName = new UserName(userName);
         this.password = new Password(password);
@@ -42,7 +42,7 @@ public class CreateUserIn {
         return email;
     }
 
-    public List<FindRoleByUuidIn> getReadByUuidIns() {
+    public FindRoleByUuidIn getReadByUuidIns() {
         return findRoleByUuidIns;
     }
 }
