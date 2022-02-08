@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "UM_USER")
 public class UserModel {
 
     @Id
@@ -31,7 +31,10 @@ public class UserModel {
     // TODO: One role has many users
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FK_USER_ROLE")
+    @JoinTable(
+            name = "UM_USER_ROLE",
+            joinColumns = @JoinColumn(name = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     private List<RoleModel> roleModel;
 
     public UserModel() {

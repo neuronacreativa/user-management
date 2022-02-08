@@ -7,7 +7,6 @@ import org.nc.usermanagement.domain.valueObjects.user.Email;
 import org.nc.usermanagement.domain.valueObjects.user.Password;
 import org.nc.usermanagement.domain.valueObjects.user.UserName;
 
-import java.util.List;
 import java.util.UUID;
 
 public class CreateUserIn {

@@ -2,17 +2,14 @@ package org.nc.usermanagement.infrastructure.persistence.db.model;
 
 import lombok.Builder;
 import org.nc.usermanagement.domain.entity.Role;
-import org.nc.usermanagement.domain.entity.User;
 import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Builder
-@Table(name = "USER_ROLE")
+@Table(name = "UM_ROLE")
 public class RoleModel {
 
     @Id

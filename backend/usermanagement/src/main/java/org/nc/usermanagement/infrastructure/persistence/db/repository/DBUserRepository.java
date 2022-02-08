@@ -2,7 +2,6 @@ package org.nc.usermanagement.infrastructure.persistence.db.repository;
 
 import org.nc.usermanagement.application.usecases.user.UserRepository;
 import org.nc.usermanagement.application.usecases.user.read.exception.UserNotFoundException;
-import org.nc.usermanagement.domain.entity.Role;
 import org.nc.usermanagement.domain.entity.User;
 import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;

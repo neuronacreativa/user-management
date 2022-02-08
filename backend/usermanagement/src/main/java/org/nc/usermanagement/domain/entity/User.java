@@ -8,8 +8,6 @@ import org.nc.usermanagement.domain.valueObjects.user.Email;
 import org.nc.usermanagement.domain.valueObjects.user.Password;
 import org.nc.usermanagement.domain.valueObjects.user.UserName;
 
-import java.util.List;
-
 public class User implements Entity<User> {
 
     private final Uuid uuid;

@@ -31,7 +31,7 @@ public class CreateRoleController {
     @PostMapping("role")
     public ResponseEntity<CreateRoleControllerOut> create(
             @RequestBody CreateRoleControllerIn createRoleControllerIn
-    ) throws UserManagementException, URISyntaxException {
+    ) throws UserManagementException {
 
         try {
 

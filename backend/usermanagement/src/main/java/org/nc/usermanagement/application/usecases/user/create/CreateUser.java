@@ -2,8 +2,6 @@ package org.nc.usermanagement.application.usecases.user.create;
 
 import org.nc.usermanagement.application.usecases.UseCaseException;
 import org.nc.usermanagement.application.usecases.role.RoleRepository;
-import org.nc.usermanagement.application.usecases.role.read.dto.FindRoleByUuidIn;
-import org.nc.usermanagement.application.usecases.role.read.exception.RoleNotFoundException;
 import org.nc.usermanagement.application.usecases.user.UserRepository;
 import org.nc.usermanagement.application.usecases.user.create.dto.CreateUserIn;
 import org.nc.usermanagement.application.usecases.user.create.dto.CreateUserOut;
@@ -16,8 +14,6 @@ import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
 
 @Transactional
 public class CreateUser {

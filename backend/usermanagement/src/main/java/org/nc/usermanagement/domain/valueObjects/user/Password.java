@@ -11,7 +11,7 @@ public class Password implements ValueObject<Password> {
     private final String password;
     private static final int CHAR_LIMIT = 20;
     private static final String PASSWORD_PATTERN =
-            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
+            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–{}:;',?/*~$^+=<>]).{8,20}$";
 
     public Password(String password) throws ValueObjectException {
         isValid(password);
