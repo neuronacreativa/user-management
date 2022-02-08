@@ -11,13 +11,11 @@ import org.nc.usermanagement.infrastructure.rest.controller.role.create.dto.Crea
 import org.nc.usermanagement.infrastructure.rest.controller.role.create.dto.CreateRoleControllerOut;
 import org.nc.usermanagement.infrastructure.rest.exception.UserManagementException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.net.URI;
-import java.net.URISyntaxException;
 
 @RestController
 public class CreateRoleController {
@@ -39,13 +37,16 @@ public class CreateRoleController {
                     new CreateRoleIn(
                             createRoleControllerIn.getRoleName(),
                             createRoleControllerIn.getPriority()
-                    ), this.dbRoleRepository);
+                    ), this.dbRoleRepository
+            );
 
-            return ResponseEntity.created(
-                    new URI(createRoleOut.getUuid())
-            ).build();
+            return ResponseEntity.status(HttpStatus.CREATED).body(
+                    new CreateRoleControllerOut(
+                            createRoleOut
+                    )
+            );
 
-        } catch (CreateRoleException | URISyntaxException | EntityException | ValueObjectException e) {
+        } catch (CreateRoleException | EntityException | ValueObjectException e) {
             throw new UserManagementException(e);
         }
 

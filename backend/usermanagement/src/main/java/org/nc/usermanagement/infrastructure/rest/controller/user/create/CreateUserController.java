@@ -47,12 +47,6 @@ public class CreateUserController {
                     )
             );
 
-//            return ResponseEntity.created(
-//                    new URI(new CreateUserControllerOut(
-//                            createUserOut
-//                    ))
-//            ).build();
-
         } catch (EntityException | ValueObjectException | UseCaseException e) {
             throw new UserManagementException(e);
         }
