@@ -15,6 +15,9 @@ public class Uuid implements ValueObject<Uuid> {
     }
 
     private void isValid(String uuid) throws ValueObjectException {
+        if (uuid == null) {
+            throw new ValueObjectException("userManagement.valueObject.ko.uuid.uuidRequired");
+        }
         if (uuid.length() > CHAR_LIMIT) {
             throw new ValueObjectException("userManagement.valueObject.ko.uuid.charLimitExceeded");
         }

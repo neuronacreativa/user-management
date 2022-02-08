@@ -18,12 +18,12 @@ public class CreateUserIn {
     private final Email email;
     private final FindRoleByUuidIn findRoleByUuidIns;
 
-    public CreateUserIn(String userName, String password, String email, FindRoleByUuidIn findRoleByUuidIns) throws ValueObjectException {
+    public CreateUserIn(String userName, String password, String email, String uuid) throws ValueObjectException {
         this.uuid = new Uuid(UUID.randomUUID().toString());
         this.userName = new UserName(userName);
         this.password = new Password(password);
         this.email = new Email(email);
-        this.findRoleByUuidIns = findRoleByUuidIns;
+        this.findRoleByUuidIns = new FindRoleByUuidIn(uuid);
     }
 
     public Uuid getUuid() {

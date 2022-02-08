@@ -7,6 +7,6 @@ import org.nc.usermanagement.domain.exception.ValueObjectException;
 
 public interface UserRepository {
     void save(User user);
-    User findByUuid(String uuid);
+    User findByUuid(String uuid) throws EntityException, ValueObjectException, UserNotFoundException;
     User findByUserName(String roleName) throws UserNotFoundException, EntityException, ValueObjectException;
 }

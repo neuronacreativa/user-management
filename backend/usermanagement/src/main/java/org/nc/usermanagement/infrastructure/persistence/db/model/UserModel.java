@@ -5,6 +5,7 @@ import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "USER")
@@ -12,25 +13,26 @@ public class UserModel {
 
     @Id
     @Column(name = "ID", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "UUID", unique = true, nullable = false, length = 40)
     private String uuid;
 
-    @Column(name = "NAME", nullable = false, length = 50)
+    @Column(name = "NAME", unique = true, nullable = false, length = 50)
     private String userName;
 
     @Column(name = "PASSWORD", nullable = false, length = 20)
     private String password;
 
-    @Column(name = "EMAIL", nullable = false, length = 100)
+    @Column(name = "EMAIL", unique = true, nullable = false, length = 100)
     private String email;
 
     // TODO: One role has many users
 
-    @ManyToOne
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_USER_ROLE")
-    private RoleModel roleModel;
+    private List<RoleModel> roleModel;
 
     public UserModel() {
     }
@@ -40,7 +42,7 @@ public class UserModel {
         this.userName = user.getUserName().getUserName();
         this.password = user.getPassword().getPassword();
         this.email = user.getEmail().getEmail();
-        this.roleModel = new RoleModel(user.getRole());
+        this.roleModel = List.of(new RoleModel(user.getRole()));
     }
 
     public int getId() {
@@ -83,11 +85,11 @@ public class UserModel {
         this.email = email;
     }
 
-    public RoleModel getRoleModel() {
+    public List<RoleModel> getRoleModel() {
         return roleModel;
     }
 
-    public void setRoleModel(RoleModel roleModel) {
+    public void setRoleModel(List<RoleModel> roleModel) {
         this.roleModel = roleModel;
     }
 
@@ -98,7 +100,7 @@ public class UserModel {
                 this.getUserName(),
                 this.getPassword(),
                 this.getEmail(),
-                this.getRoleModel().getRole()
+                this.getRoleModel().get(0).getRole()
         );
     }
 }

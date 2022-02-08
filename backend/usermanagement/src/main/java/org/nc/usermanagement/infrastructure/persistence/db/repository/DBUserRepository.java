@@ -26,8 +26,15 @@ public class DBUserRepository implements UserRepository {
     }
 
     @Override
-    public User findByUuid(String uuid) {
-        return null;
+    public User findByUuid(String uuid)
+            throws EntityException, ValueObjectException, UserNotFoundException
+    {
+        Optional<UserModel> userModel = jpaUserModelRepository.findByUuid(uuid);
+
+        if (userModel.isEmpty())
+            throw new UserNotFoundException();
+
+        return userModel.get().getUser();
     }
 
     @Override

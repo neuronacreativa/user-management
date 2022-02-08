@@ -8,6 +8,7 @@ import org.nc.usermanagement.application.usecases.role.read.FindRoleByUuid;
 import org.nc.usermanagement.application.usecases.role.update.UpdateRole;
 import org.nc.usermanagement.application.usecases.user.create.CreateUser;
 import org.nc.usermanagement.application.usecases.user.read.FindUserByUserName;
+import org.nc.usermanagement.application.usecases.user.read.FindUserByUuid;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -49,6 +50,11 @@ public class Context {
     @Bean
     public FindUserByUserName getFindUserByUserName() {
         return new FindUserByUserName();
+    }
+
+    @Bean
+    public FindUserByUuid getFindUserByUuid() {
+        return new FindUserByUuid();
     }
 
     @Bean

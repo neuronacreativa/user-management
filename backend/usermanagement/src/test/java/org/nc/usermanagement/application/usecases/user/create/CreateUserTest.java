@@ -8,6 +8,10 @@ import org.nc.usermanagement.application.usecases.role.create.dto.CreateRoleOut;
 import org.nc.usermanagement.application.usecases.role.read.dto.FindRoleByUuidIn;
 import org.nc.usermanagement.application.usecases.role.read.exception.RoleNotFoundException;
 import org.nc.usermanagement.application.usecases.user.create.dto.CreateUserIn;
+import org.nc.usermanagement.application.usecases.user.create.dto.CreateUserOut;
+import org.nc.usermanagement.application.usecases.user.read.FindUserByUuid;
+import org.nc.usermanagement.application.usecases.user.read.dto.FindUserByUuidIn;
+import org.nc.usermanagement.domain.entity.Role;
 import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
 import org.nc.usermanagement.infrastructure.persistence.db.repository.DBRoleRepository;
@@ -29,6 +33,9 @@ class CreateUserTest {
     CreateUser createUser;
 
     @Autowired
+    FindUserByUuid findUserByUuid;
+
+    @Autowired
     CreateRole createRole;
 
     @Autowired
@@ -46,24 +53,25 @@ class CreateUserTest {
                 ), dbRoleRepository
         );
 
-        FindRoleByUuidIn findRoleByUuidIn = new FindRoleByUuidIn(createRoleOut.getUuid());
-
-        assertDoesNotThrow(() ->
-                this.createUser.create(
+        assertDoesNotThrow(() -> {
+                CreateUserOut createUserOut = this.createUser.create(
                         new CreateUserIn(
-                            "user.name",
-                            "validPassword123!",
-                            "user.name@example.org",
-                                findRoleByUuidIn
+                                "user.name",
+                                "validPassword123!",
+                                "user.name@example.org",
+                                createRoleOut.getUuid()
                         ), dbUserRepository, dbRoleRepository
-                )
+                );
+                findUserByUuid.findUserByUuid(
+                        new FindUserByUuidIn(createUserOut.getUuid()),
+                        dbUserRepository
+                );
+            }
         );
     }
 
     @Test
-    void inValidRoleNotExists() throws ValueObjectException {
-
-        FindRoleByUuidIn findRoleByUuidIn = new FindRoleByUuidIn(UUID.randomUUID().toString());
+    void inValidRoleNotExists() {
 
         assertThrows(RoleNotFoundException.class, () ->
                 this.createUser.create(
@@ -71,11 +79,9 @@ class CreateUserTest {
                                 "user.name",
                                 "validPassword123!",
                                 "user.name@example.org",
-                                findRoleByUuidIn
+                                UUID.randomUUID().toString()
                         ), dbUserRepository, dbRoleRepository
                 )
         );
     }
-
-    // TODO: UserName has to be unique
 }

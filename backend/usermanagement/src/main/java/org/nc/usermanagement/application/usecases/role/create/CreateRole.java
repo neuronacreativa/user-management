@@ -11,6 +11,9 @@ import org.nc.usermanagement.application.usecases.role.read.exception.RoleNotFou
 import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
 
+import javax.transaction.Transactional;
+
+@Transactional
 public class CreateRole {
 
     private final FindRoleByRoleName findRoleByRoleName;

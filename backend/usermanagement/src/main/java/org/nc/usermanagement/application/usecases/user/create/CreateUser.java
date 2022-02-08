@@ -15,9 +15,11 @@ import org.nc.usermanagement.domain.entity.User;
 import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+@Transactional
 public class CreateUser {
 
     private final FindUserByUserName findUserByUserName;
