@@ -13,7 +13,7 @@ class UserTest {
         return new Role(
                 UUID.randomUUID().toString(),
                 "ROLE_SUPER_ADMIN",
-                0, null
+                0
         );
     }
 

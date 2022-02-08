@@ -12,7 +12,7 @@ public class UpdateRoleIn {
         this.role = new Role(
             uuid,
             roleName,
-            priority, null
+            priority
         );
     }
 

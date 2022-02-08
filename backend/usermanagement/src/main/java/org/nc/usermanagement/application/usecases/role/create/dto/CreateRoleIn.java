@@ -15,7 +15,7 @@ public class CreateRoleIn {
             this.role = new Role(
                     UUID.randomUUID().toString(),
                     roleName,
-                    priority, null
+                    priority
             );
         } catch (ValueObjectException | EntityException e) {
             throw new CreateRoleException(e);

@@ -7,21 +7,18 @@ import org.nc.usermanagement.domain.valueObjects.role.Priority;
 import org.nc.usermanagement.domain.valueObjects.role.RoleName;
 import org.nc.usermanagement.domain.valueObjects.shared.Uuid;
 
-import java.util.List;
 
 public class Role implements Entity<Role> {
 
     private final Uuid uuid;
     private final RoleName roleName;
     private final Priority priority;
-    private final List<User> users;
 
-    public Role(String uuid, String roleName, int priority, List<User> users) throws ValueObjectException, EntityException {
+    public Role(String uuid, String roleName, int priority) throws ValueObjectException, EntityException {
         isValid(uuid, roleName);
         this.uuid = new Uuid(uuid);
         this.roleName = new RoleName(roleName);
         this.priority = new Priority(priority);
-        this.users = users;
     }
 
     private void isValid(String uuid, String roleName) throws EntityException {
@@ -43,10 +40,6 @@ public class Role implements Entity<Role> {
 
     public Priority getPriority() {
         return priority;
-    }
-
-    public List<User> getUsers() {
-        return users;
     }
 
     @Override

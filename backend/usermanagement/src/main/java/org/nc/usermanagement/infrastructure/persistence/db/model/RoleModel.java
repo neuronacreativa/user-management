@@ -2,10 +2,12 @@ package org.nc.usermanagement.infrastructure.persistence.db.model;
 
 import lombok.Builder;
 import org.nc.usermanagement.domain.entity.Role;
+import org.nc.usermanagement.domain.entity.User;
 import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,18 +29,14 @@ public class RoleModel {
     @Column(name = "PRIORITY", nullable = false)
     private int priority;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleModel")
-    private List<UserModel> userModels;
-
     public RoleModel() {
     }
 
-    public RoleModel(int id, String uuid, String roleName, int priority, List<UserModel> userModels) {
+    public RoleModel(int id, String uuid, String roleName, int priority) {
         this.id = id;
         this.uuid = uuid;
         this.roleName = roleName;
         this.priority = priority;
-        this.userModels = userModels;
     }
 
     public RoleModel(Role role) {
@@ -48,11 +46,11 @@ public class RoleModel {
     }
 
     public Role getRole() throws ValueObjectException, EntityException {
-        // TODO: get Users from UserModels
+
         return new Role(
                 this.getUuid(),
                 this.getRoleName(),
-                this.getPriority(), null
+                this.getPriority()
         );
     }
 
@@ -92,13 +90,5 @@ public class RoleModel {
 
     public void setPriority(int priority) {
         this.priority = priority;
-    }
-
-    public List<UserModel> getUserModels() {
-        return userModels;
-    }
-
-    public void setUserModels(List<UserModel> userModels) {
-        this.userModels = userModels;
     }
 }
