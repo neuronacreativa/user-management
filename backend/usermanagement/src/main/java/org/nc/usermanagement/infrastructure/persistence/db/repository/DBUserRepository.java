@@ -20,7 +20,10 @@ public class DBUserRepository implements UserRepository {
 
     @Override
     public void save(User user) {
-        UserModel userModel = new UserModel(user);
+
+        // TODO: Set userModel attributes from user
+
+        UserModel userModel = new UserModel();
         jpaUserModelRepository.save(userModel);
     }
 
@@ -33,7 +36,15 @@ public class DBUserRepository implements UserRepository {
         if (userModel.isEmpty())
             throw new UserNotFoundException();
 
-        return userModel.get().getUser();
+        // TODO: Create new User from userModel
+
+        return new User(
+                userModel.get().getUuid(),
+                userModel.get().getUserName(),
+                userModel.get().getPassword(),
+                userModel.get().getEmail(),
+                null
+        );
     }
 
     @Override
@@ -45,7 +56,15 @@ public class DBUserRepository implements UserRepository {
         if (userModel.isEmpty())
             throw new UserNotFoundException();
 
-        return userModel.get().getUser();
+        // TODO: Create new User from userModel
+
+        return new User(
+                userModel.get().getUuid(),
+                userModel.get().getUserName(),
+                userModel.get().getPassword(),
+                userModel.get().getEmail(),
+                null
+        );
     }
 
 }

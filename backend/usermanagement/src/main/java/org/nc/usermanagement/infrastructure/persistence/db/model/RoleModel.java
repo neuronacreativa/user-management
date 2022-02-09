@@ -6,6 +6,7 @@ import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Builder
@@ -26,14 +27,18 @@ public class RoleModel {
     @Column(name = "PRIORITY", nullable = false)
     private int priority;
 
+    @OneToMany(mappedBy = "roleModel")
+    List<UserRoleModel> userRoleModels;
+
     public RoleModel() {
     }
 
-    public RoleModel(int id, String uuid, String roleName, int priority) {
+    public RoleModel(int id, String uuid, String roleName, int priority, List<UserRoleModel> userRoleModels) {
         this.id = id;
         this.uuid = uuid;
         this.roleName = roleName;
         this.priority = priority;
+        this.userRoleModels = userRoleModels;
     }
 
     public RoleModel(Role role) {
