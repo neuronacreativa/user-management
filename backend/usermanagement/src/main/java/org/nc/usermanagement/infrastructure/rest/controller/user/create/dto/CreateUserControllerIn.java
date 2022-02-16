@@ -7,11 +7,11 @@ public class CreateUserControllerIn {
 
     private final CreateUserIn createUserIn;
 
-    public CreateUserControllerIn(String userName, String password, String email, String uuid)
+    public CreateUserControllerIn(String userName, String password, String email, String roleUuid)
             throws ValueObjectException
     {
         this.createUserIn = new CreateUserIn(
-                userName, password, email, uuid
+                userName, password, email, roleUuid
         );
     }
 
