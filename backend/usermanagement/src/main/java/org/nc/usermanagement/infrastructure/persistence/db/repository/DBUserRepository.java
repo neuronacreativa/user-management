@@ -1,5 +1,6 @@
 package org.nc.usermanagement.infrastructure.persistence.db.repository;
 
+import org.jetbrains.annotations.NotNull;
 import org.nc.usermanagement.application.usecases.user.UserRepository;
 import org.nc.usermanagement.application.usecases.user.read.exception.UserNotFoundException;
 import org.nc.usermanagement.domain.entity.Role;
@@ -28,26 +29,26 @@ public class DBUserRepository implements UserRepository {
 
         List<UserRoleModel> userRoleModelList = new ArrayList<>();
 
-        Role role = user.getRole();
-
         UserModel userModel = new UserModel();
         userModel.setUuid(user.getUuid().getUuid());
         userModel.setUserName(user.getUserName().getUserName());
         userModel.setPassword(user.getPassword().getPassword());
         userModel.setEmail(user.getEmail().getEmail());
 
-        RoleModel roleModel = new RoleModel();
-        roleModel.setUuid(role.getUuid().getUuid());
-        roleModel.setRoleName(role.getRoleName().getRoleName());
-        roleModel.setPriority(role.getPriority().getPriority());
+        for (Role role : user.getRoles()) {
+            RoleModel roleModel = new RoleModel();
+            roleModel.setUuid(role.getUuid().getUuid());
+            roleModel.setRoleName(role.getRoleName().getRoleName());
+            roleModel.setPriority(role.getPriority().getPriority());
 
-        UserRoleModel userRoleModel = new UserRoleModel();
-        userRoleModel.setUserModel(userModel);
-        userRoleModel.setRoleModel(roleModel);
+            UserRoleModel userRoleModel = new UserRoleModel();
+            userRoleModel.setUserModel(userModel);
+            userRoleModel.setRoleModel(roleModel);
 
-        userRoleModelList.add(
-                userRoleModel
-        );
+            userRoleModelList.add(
+                    userRoleModel
+            );
+        }
 
         userModel.setUserRoleModels(userRoleModelList);
 
@@ -60,20 +61,7 @@ public class DBUserRepository implements UserRepository {
     {
         Optional<UserModel> userModel = jpaUserModelRepository.findByUuid(uuid);
 
-        if (userModel.isEmpty())
-            throw new UserNotFoundException();
-
-        RoleModel roleModel = userModel.get().getUserRoleModels().get(0).getRoleModel();
-
-        // TODO: User must has a roles' list
-
-        return new User(
-                userModel.get().getUuid(),
-                userModel.get().getUserName(),
-                userModel.get().getPassword(),
-                userModel.get().getEmail(),
-                roleModel.getRole()
-        );
+        return getUser(userModel);
     }
 
     @Override
@@ -82,17 +70,29 @@ public class DBUserRepository implements UserRepository {
     {
         Optional<UserModel> userModel = jpaUserModelRepository.findByUserName(userName);
 
+        return getUser(userModel);
+    }
+
+    @NotNull
+    private User getUser(Optional<UserModel> userModel) throws UserNotFoundException, ValueObjectException, EntityException {
         if (userModel.isEmpty())
             throw new UserNotFoundException();
 
-        // TODO: Create new User from userModel
+        List<UserRoleModel> userRoleModels = userModel.get().getUserRoleModels();
+        List<Role> roles = new ArrayList<>();
+
+        for (UserRoleModel userRoleModel : userRoleModels) {
+            roles.add(
+                    userRoleModel.getRoleModel().getRole()
+            );
+        }
 
         return new User(
                 userModel.get().getUuid(),
                 userModel.get().getUserName(),
                 userModel.get().getPassword(),
                 userModel.get().getEmail(),
-                null
+                roles
         );
     }
 

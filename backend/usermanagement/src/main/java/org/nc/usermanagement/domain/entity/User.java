@@ -8,27 +8,26 @@ import org.nc.usermanagement.domain.valueObjects.user.Email;
 import org.nc.usermanagement.domain.valueObjects.user.Password;
 import org.nc.usermanagement.domain.valueObjects.user.UserName;
 
+import java.util.List;
+
 public class User implements Entity<User> {
 
     private final Uuid uuid;
     private final UserName userName;
     private final Password password;
     private final Email email;
-    private final Role role;
+    private final List<Role> roles;
 
-    public User(String uuid, String userName, String password, String email, Role role) throws ValueObjectException, EntityException {
-
-        // TODO: User must has a roles' list
-
-        isValid(userName, password, email, role);
+    public User(String uuid, String userName, String password, String email, List<Role> roles) throws ValueObjectException, EntityException {
+        isValid(userName, password, email, roles);
         this.uuid = new Uuid(uuid);
         this.userName = new UserName(userName);
         this.password = new Password(password);
         this.email = new Email(email);
-        this.role = role;
+        this.roles = roles;
     }
 
-    private void isValid(String userName, String password, String email, Role role) throws EntityException {
+    private void isValid(String userName, String password, String email, List<Role> roles) throws EntityException {
         if (userName == null || userName.trim().length() == 0) {
             throw new EntityException("userManagement.entity.ko.user.userNameRequired");
         }
@@ -38,8 +37,15 @@ public class User implements Entity<User> {
         if (email == null || email.trim().length() == 0) {
             throw new EntityException("userManagement.entity.ko.user.emailRequired");
         }
-        if (role == null) {
+
+        if (roles == null) {
             throw new EntityException("userManagement.entity.ko.user.roleRequired");
+        }
+
+        for (Role role : roles) {
+            if (role == null) {
+                throw new EntityException("userManagement.entity.ko.user.roleRequired");
+            }
         }
     }
 
@@ -59,8 +65,8 @@ public class User implements Entity<User> {
         return email;
     }
 
-    public Role getRole() {
-        return role;
+    public List<Role> getRoles() {
+        return roles;
     }
 
     @Override

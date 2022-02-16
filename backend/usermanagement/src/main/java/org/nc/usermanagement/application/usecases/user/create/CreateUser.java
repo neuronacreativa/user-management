@@ -14,6 +14,7 @@ import org.nc.usermanagement.domain.exception.EntityException;
 import org.nc.usermanagement.domain.exception.ValueObjectException;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Transactional
 public class CreateUser {
@@ -41,7 +42,7 @@ public class CreateUser {
                             createUserIn.getUserName().getUserName(),
                             createUserIn.getPassword().getPassword(),
                             createUserIn.getEmail().getEmail(),
-                            role
+                            List.of(role)
                     )
             );
         }
