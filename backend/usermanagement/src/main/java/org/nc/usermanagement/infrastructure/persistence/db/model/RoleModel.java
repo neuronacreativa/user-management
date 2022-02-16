@@ -93,4 +93,12 @@ public class RoleModel {
     public void setPriority(int priority) {
         this.priority = priority;
     }
+
+    public List<UserRoleModel> getUserRoleModels() {
+        return userRoleModels;
+    }
+
+    public void setUserRoleModels(List<UserRoleModel> userRoleModels) {
+        this.userRoleModels = userRoleModels;
+    }
 }

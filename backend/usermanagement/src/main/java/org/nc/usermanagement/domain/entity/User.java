@@ -17,6 +17,9 @@ public class User implements Entity<User> {
     private final Role role;
 
     public User(String uuid, String userName, String password, String email, Role role) throws ValueObjectException, EntityException {
+
+        // TODO: User must has a roles' list
+
         isValid(userName, password, email, role);
         this.uuid = new Uuid(uuid);
         this.userName = new UserName(userName);
