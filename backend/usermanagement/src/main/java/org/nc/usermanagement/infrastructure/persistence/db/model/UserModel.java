@@ -1,9 +1,5 @@
 package org.nc.usermanagement.infrastructure.persistence.db.model;
 
-import org.nc.usermanagement.domain.entity.User;
-import org.nc.usermanagement.domain.exception.EntityException;
-import org.nc.usermanagement.domain.exception.ValueObjectException;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -28,24 +24,20 @@ public class UserModel {
     @Column(name = "EMAIL", unique = true, nullable = false, length = 100)
     private String email;
 
-    // TODO: One role has many users
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "UM_USER_ROLE",
-            joinColumns = @JoinColumn(name = "USER_ID"),
-            inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
-    private List<RoleModel> roleModel;
+    @OneToMany(mappedBy = "userModel")
+    List<UserRoleModel> userRoleModels;
 
     public UserModel() {
     }
 
-    public UserModel(User user) {
-        this.uuid = user.getUuid().getUuid();
-        this.userName = user.getUserName().getUserName();
-        this.password = user.getPassword().getPassword();
-        this.email = user.getEmail().getEmail();
-        this.roleModel = List.of(new RoleModel(user.getRole()));
+    public UserModel(int id, String uuid, String userName, String password, String email, List<UserRoleModel> userRoleModels) {
+        this.id = id;
+        this.uuid = uuid;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.userRoleModels = userRoleModels;
     }
 
     public int getId() {
@@ -88,22 +80,11 @@ public class UserModel {
         this.email = email;
     }
 
-    public List<RoleModel> getRoleModel() {
-        return roleModel;
+    public List<UserRoleModel> getUserRoleModels() {
+        return userRoleModels;
     }
 
-    public void setRoleModel(List<RoleModel> roleModel) {
-        this.roleModel = roleModel;
-    }
-
-    public User getUser() throws EntityException, ValueObjectException {
-
-        return new User(
-                this.getUuid(),
-                this.getUserName(),
-                this.getPassword(),
-                this.getEmail(),
-                this.getRoleModel().get(0).getRole()
-        );
+    public void setUserRoleModels(List<UserRoleModel> userRoleModels) {
+        this.userRoleModels = userRoleModels;
     }
 }
