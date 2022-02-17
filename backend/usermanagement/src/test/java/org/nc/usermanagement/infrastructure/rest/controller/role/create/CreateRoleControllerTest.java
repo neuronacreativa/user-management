@@ -1,4 +1,4 @@
-package org.nc.usermanagement.infrastructure.rest.role.controller;
+package org.nc.usermanagement.infrastructure.rest.controller.role.create;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
