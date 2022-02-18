@@ -40,6 +40,14 @@ public class UserModel {
         this.userRoleModels = userRoleModels;
     }
 
+    public UserModel(String uuid, String userName, String password, String email, List<UserRoleModel> userRoleModels) {
+        this.uuid = uuid;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.userRoleModels = userRoleModels;
+    }
+
     public int getId() {
         return id;
     }

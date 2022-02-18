@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface JpaUserModelRepository extends PagingAndSortingRepository<UserModel, Integer> {
     Optional<UserModel> findByUserName(String userName);
     Optional<UserModel> findByUuid(String uuid);
+    void deleteByUuid(String uuid);
 }

@@ -9,4 +9,5 @@ public interface UserRepository {
     void save(User user);
     User findByUuid(String uuid) throws EntityException, ValueObjectException, UserNotFoundException;
     User findByUserName(String roleName) throws UserNotFoundException, EntityException, ValueObjectException;
+    void delete(User user) throws UserNotFoundException;
 }

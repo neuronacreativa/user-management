@@ -73,6 +73,13 @@ public class DBUserRepository implements UserRepository {
         return getUser(userModel);
     }
 
+    @Override
+    public void delete(User user) throws UserNotFoundException {
+        this.jpaUserModelRepository.deleteByUuid(
+                user.getUuid().getUuid()
+        );
+    }
+
     @NotNull
     private User getUser(Optional<UserModel> userModel) throws UserNotFoundException, ValueObjectException, EntityException {
         if (userModel.isEmpty())

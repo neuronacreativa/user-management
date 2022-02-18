@@ -7,6 +7,7 @@ import org.nc.usermanagement.application.usecases.role.read.FindRoleByRoleName;
 import org.nc.usermanagement.application.usecases.role.read.FindRoleByUuid;
 import org.nc.usermanagement.application.usecases.role.update.UpdateRole;
 import org.nc.usermanagement.application.usecases.user.create.CreateUser;
+import org.nc.usermanagement.application.usecases.user.delete.DeleteUser;
 import org.nc.usermanagement.application.usecases.user.read.FindUserByUserName;
 import org.nc.usermanagement.application.usecases.user.read.FindUserByUuid;
 import org.springframework.context.annotation.Bean;
@@ -60,5 +61,10 @@ public class Context {
     @Bean
     public CreateUser getCreateUser() {
         return new CreateUser(getFindUserByUserName());
+    }
+
+    @Bean
+    public DeleteUser getDeleteUser() {
+        return new DeleteUser();
     }
 }
