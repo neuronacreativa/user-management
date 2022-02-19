@@ -6,8 +6,8 @@ import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaGenerator;
 import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
-import org.nc.usermanagement.infrastructure.rest.graphql.fetcher.AllRolesDataFetcher;
-import org.nc.usermanagement.infrastructure.rest.graphql.fetcher.RoleDataFetcher;
+import org.nc.usermanagement.infrastructure.rest.graphql.fetcher.role.AllRolesDataFetcher;
+import org.nc.usermanagement.infrastructure.rest.graphql.fetcher.role.RoleDataFetcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ import java.io.File;
 import java.io.IOException;
 
 @Component
-public class GraphQLProvider {
+public class GraphQLRoleProvider {
 
     @Autowired
     private AllRolesDataFetcher allRolesDataFetcher;
@@ -27,7 +27,7 @@ public class GraphQLProvider {
     @Autowired
     private RoleDataFetcher roleDataFetcher;
 
-    @Value("classpath:schema.graphql")
+    @Value("classpath:schemaRole.graphql")
     private Resource resource;
 
     private GraphQL graphQL;

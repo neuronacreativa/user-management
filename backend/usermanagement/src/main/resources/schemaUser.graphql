@@ -1,0 +1,12 @@
+schema{
+  query:Query
+}
+
+type User{
+  uuid:String
+}
+
+type Query{
+  allUsers(page: Int = 0, pageSize: Int = 0, orderType: String): [User]
+  user(uuid: String): User
+}

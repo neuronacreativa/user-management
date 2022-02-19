@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  user-management:
+    container_name: user-management
+    hostname: user-management
+    build: backend/usermanagement/
+    ports:
+      - "8080:8080"
+    networks:
+      - user-management-net
+    depends_on:
+      - mysqldb
+
+  mysqldb:
+    image: mysql:8
+    networks:
+      - user-management-net
+    environment:
+      - MYSQL_ROOT_PASSWORD=users
+      - MYSQL_DATABASE=USERS
+
+networks:
+  user-management-net:

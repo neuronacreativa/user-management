@@ -1,4 +1,4 @@
-package org.nc.usermanagement.infrastructure.rest.graphql.fetcher;
+package org.nc.usermanagement.infrastructure.rest.graphql.fetcher.role;
 
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
