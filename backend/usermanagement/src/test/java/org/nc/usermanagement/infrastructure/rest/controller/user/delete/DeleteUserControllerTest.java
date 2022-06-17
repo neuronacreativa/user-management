@@ -60,7 +60,7 @@ class DeleteUserControllerTest {
         );
 
         this.mockMvc.perform(
-                        delete("/user/" + createUserOut.getUuid())
+                        delete("/api/user/" + createUserOut.getUuid())
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful());

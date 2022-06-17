@@ -35,7 +35,7 @@ class CreateRoleControllerTest {
         String requestJson = objectMapper.writeValueAsString(createRoleControllerIn);
 
         this.mockMvc.perform(
-                post("/role")
+                post("/api/role")
                         .content(requestJson)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())

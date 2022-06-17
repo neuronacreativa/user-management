@@ -44,7 +44,7 @@ class DeleteRoleControllerTest {
         );
 
         this.mockMvc.perform(
-                        delete("/role/" + createRoleOut.getUuid())
+                        delete("/api/role/" + createRoleOut.getUuid())
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful());

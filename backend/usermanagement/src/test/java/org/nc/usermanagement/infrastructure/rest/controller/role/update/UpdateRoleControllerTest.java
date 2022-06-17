@@ -53,7 +53,7 @@ class UpdateRoleControllerTest {
         );
 
         this.mockMvc.perform(
-                        put("/role/" + createRoleOut.getUuid())
+                        put("/api/role/" + createRoleOut.getUuid())
                                 .content(requestJson)
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
