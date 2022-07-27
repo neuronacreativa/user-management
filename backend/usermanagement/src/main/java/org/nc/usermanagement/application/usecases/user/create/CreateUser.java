@@ -25,7 +25,8 @@ public class CreateUser {
         this.findUserByUserName = findUserByUserName;
     }
 
-    public CreateUserOut create(CreateUserIn createUserIn, UserRepository userRepository, RoleRepository roleRepository) throws UseCaseException, EntityException, ValueObjectException {
+    public CreateUserOut create(CreateUserIn createUserIn, UserRepository userRepository, RoleRepository roleRepository)
+            throws UseCaseException, EntityException, ValueObjectException {
 
         Role role = roleRepository.findByUuid(createUserIn.getReadByUuidIns().getUuid().getUuid());
 
