@@ -1,4 +1,4 @@
-# User Management microservice
+# User Management API
 
 ## Docker deploy
 ```
