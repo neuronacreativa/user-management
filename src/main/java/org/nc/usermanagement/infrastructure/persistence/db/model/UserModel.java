@@ -8,8 +8,7 @@ import java.util.List;
 public class UserModel {
 
     @Id
-    @Column(name = "ID", unique = true, nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
 
     @Column(name = "UUID", unique = true, nullable = false, length = 40)
