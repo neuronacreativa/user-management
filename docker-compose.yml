@@ -3,7 +3,7 @@ services:
   user-management:
     container_name: user-management
     hostname: user-management
-    build: backend/usermanagement/
+    build: .
     ports:
       - "8080:8080"
     networks:
