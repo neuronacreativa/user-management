@@ -37,8 +37,6 @@
             <artifactId>spring-session-core</artifactId>
             <version>2.7.0</version>
         </dependency>
-
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -47,23 +45,30 @@
             <optional>true</optional>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>2.7.5</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- H2 -->
+
+        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>2.1.214</version>
             <scope>runtime</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <version>2.7.5</version>
-            <scope>test</scope>
-        </dependency>
+        <!-- SpringFox -->
+
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
             <version>3.0.0</version>
         </dependency>
+
+        <!-- GraphQL -->
 
         <dependency>
             <groupId>com.graphql-java</groupId>
@@ -75,6 +80,8 @@
             <artifactId>graphql-java-tools</artifactId>
             <version>5.2.4</version>
         </dependency>
+
+        <!-- Lombok -->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
